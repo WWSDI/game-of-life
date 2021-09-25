@@ -1,23 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import Board from "./components/Board";
+import Control from "./components/Control";
 
 function App() {
+  const [cols, setCols] = useState(40);
+  const [rows, setRows] = useState(30);
+  const [start, setStart] = useState(false)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <Setting /> */}
+      <Board cols={cols} rows={rows} start={start}setStart={setStart} />
+      <Control start={start} setStart={setStart} />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Cell from "./Cell";
 import styles from "./styles.module.css";
 
@@ -16,8 +16,10 @@ const getInitState = (cols, rows) => {
 /* Any live cell with fewer than two live neighbours dies, as if by underpopulation.
 Any live cell with two or three live neighbours lives on to the next generation.
 Any live cell with more than three live neighbours dies, as if by overpopulation.
+Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
 
-Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction. */
+
+*/
 const getCol = (idx, cols, rows) => idx % cols;
 const getRow = (idx, cols, rows) => Math.floor(idx / cols);
 const hasTopRow = (idx, cols, rows) => {
@@ -65,7 +67,22 @@ const getNeighbours = (idx, cols, rows) => {
   return neighbours.flat();
 };
 
-export default function Board({ cols, rows }) {
+// return Number of Live Neighbours
+const getNLN = (board, neighbours) => {
+  const state = neighbours.map((n) => board[n]);
+  const NLN = state.filter((s) => s === true).length;
+  return NLN;
+};
+const getFate = (live, NLN, board) => {
+  
+  if (live) {
+    return NLN < 2 ? false : NLN === 2 || NLN === 3 ? true : false;
+  } else {
+    return NLN === 3 ? true : false;
+  }
+};
+
+export default function Board({ cols, rows, start, setStart }) {
   const [board, setBoard] = useState(getInitState(cols, rows));
 
   const handleClick = ({ target: { attributes } }) => {
@@ -89,10 +106,21 @@ export default function Board({ cols, rows }) {
     setBoard(newBoard);
   };
 
+  useEffect(() => {
+    console.log("🌸", start);
+    if (start) {
+      const newBoard = board.map((live, i) =>
+        getFate(live, getNLN(board, getNeighbours(i, cols, rows), board)),
+      );
+      setBoard(newBoard);
+    }
+    return () => {setStart(false)};
+  }, [start, board, cols, rows]);
+
   return (
     <div className={styles.board}>
       {board.map((v, i) => {
-        return <Cell handleClick={handleClick} value={v} idx={i} />;
+        return <Cell key={i} handleClick={handleClick} value={v} idx={i} />;
       })}
     </div>
   );

@@ -1,10 +1,18 @@
 import Button from "./Button";
 
-export default function Control() {
-  return <div>
-    <Button >▶️ Start | ⏸ Pause</Button>
-    <Button >⥅ Step</Button>
-    {/* <Button >Start</Button>
+export default function Control({ start, setStart }) {
+  const handleClick = () => {
+    console.log("⭐️", start);
+    setStart(!start);
+    console.log("new⭐️", start);
+  };
+
+  return (
+    <div>
+      <Button >▶️ Start | ⏸ Pause</Button>
+      <Button handleClick={handleClick}>⥅ Step</Button>
+      {/* <Button >Start</Button>
     <Button >Start</Button> */}
-  </div>;
+    </div>
+  );
 }
