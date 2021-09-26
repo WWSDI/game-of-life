@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { getRow } from "./Board";
 import Button from "./Button";
 
 export default function Control({
@@ -15,17 +13,12 @@ export default function Control({
   setStart,
   clickRandom,
   changeRes
-  ,draw,setDraw
 }) {
   const handleClick = () => {
     console.log("⭐️", start);
     setStart(!start);
     console.log("new⭐️", start);
   };
-  const toggleDraw = () =>{
-    console.log('✏️',draw)
-    setDraw(!draw)
-  }
 
   return (
     <div>
