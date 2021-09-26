@@ -80,8 +80,6 @@ function App() {
         setStart={setStart}
         clickRandom={clickRandom}
         changeRes={changeRes}
-        draw={draw}
-        setDraw={setDraw}
       />
     </div>
   );

@@ -1,7 +1,6 @@
 import styles from "./styles.module.css";
 
 export default function Cell({ handleClick, value, idx, handleMouseEnter }) {
-  // const [active, setActive] = useState(false);
   return (
     <div
       onClick={handleClick}

@@ -78,7 +78,8 @@ export default function Board({
   rows,
   start,
   setStart,
-  speed,setGeneration
+  speed,
+  setGeneration,
 }) {
   const handleClick = ({ target: { attributes } }) => {
     const {
@@ -100,27 +101,28 @@ export default function Board({
   const handleMouseEnter = (e) => {
     const idx = e.target.attributes.idx.value;
     // console.log("🖱", e, idx);
-    if (!e.ctrlKey) return;
-    const newBoard = [...board];
-    newBoard[idx] = !newBoard[idx];
-    setBoard(newBoard);
+    if (e.ctrlKey ) {
+      const newBoard = [...board];
+      newBoard[idx] = !newBoard[idx];
+      setBoard(newBoard);
+    }
   };
 
   useEffect(() => {
-    console.log("🌸", start);
+    console.log("🌸" );
     setTimeout(() => {
       if (!start) return;
       const newBoard = board.map((live, i) =>
         getFate(live, getNLN(board, getNeighbours(i, cols, rows), board)),
       );
       setBoard(newBoard);
-      setGeneration(gen => gen + 1)
+      setGeneration((gen) => gen + 1);
     }, speed);
 
     return () => {
       // setStart(false);
     };
-  }, [start, board, cols, rows, setBoard, speed, setStart]);
+  }, [start, board, cols, rows, setBoard, speed, setStart, setGeneration]);
 
   return (
     <div className={styles.board} id="board">

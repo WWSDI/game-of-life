@@ -65,6 +65,7 @@ export default function Control({
             setSpeed(e.target.value);
           }}
         />
+        <span>{speed}</span>
         <Button>⥅ Step</Button>
       </div>
 
@@ -81,7 +82,7 @@ export default function Control({
       </div>
     
       <div id="draw" className="container">
-        <Button handleClick={toggleDraw}>Draw (hold ctl key ^)</Button>
+        <Button >Draw (hold ctl key ^)</Button>
       </div>
     </div>
   );

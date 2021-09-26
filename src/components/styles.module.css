@@ -1,6 +1,6 @@
 :root{
   --cellWidth: 1rem;
-  --cols:50;
+  --cols:40;
 }
 
 .board {
