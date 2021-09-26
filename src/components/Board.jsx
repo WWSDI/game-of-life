@@ -2,16 +2,6 @@ import { useEffect, useState } from "react";
 import Cell from "./Cell";
 import styles from "./styles.module.css";
 
-const getInitState = (cols, rows) => {
-  const bd = Array(cols * rows).fill(false);
-  bd[35] = true;
-  bd[36] = true;
-  bd[42] = true;
-  bd[43] = true;
-  bd[55] = true;
-  return bd;
-};
-
 // Four rules:
 /* Any live cell with fewer than two live neighbours dies, as if by underpopulation.
 Any live cell with two or three live neighbours lives on to the next generation.
@@ -74,7 +64,6 @@ const getNLN = (board, neighbours) => {
   return NLN;
 };
 const getFate = (live, NLN, board) => {
-  
   if (live) {
     return NLN < 2 ? false : NLN === 2 || NLN === 3 ? true : false;
   } else {
@@ -82,9 +71,14 @@ const getFate = (live, NLN, board) => {
   }
 };
 
-export default function Board({ cols, rows, start, setStart }) {
-  const [board, setBoard] = useState(getInitState(cols, rows));
-
+export default function Board({
+  board,
+  setBoard,
+  cols,
+  rows,
+  start,
+  setStart,
+}) {
   const handleClick = ({ target: { attributes } }) => {
     // toggle the Cell on/off
     // if (e.target?.value) return false;
@@ -114,7 +108,11 @@ export default function Board({ cols, rows, start, setStart }) {
       );
       setBoard(newBoard);
     }
-    return () => {setStart(false)};
+
+    return () => {
+      setTimeout(() => {}, 100);
+      // setStart(false);
+    };
   }, [start, board, cols, rows]);
 
   return (
