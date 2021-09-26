@@ -97,6 +97,14 @@ export default function Board({
 
     setBoard(newBoard);
   };
+  const handleMouseEnter = (e) => {
+    const idx = e.target.attributes.idx.value;
+    // console.log("🖱", e, idx);
+    if (!e.ctrlKey) return;
+    const newBoard = [...board];
+    newBoard[idx] = !newBoard[idx];
+    setBoard(newBoard);
+  };
 
   useEffect(() => {
     console.log("🌸", start);
@@ -116,7 +124,15 @@ export default function Board({
   return (
     <div className={styles.board} id="board">
       {board.map((v, i) => {
-        return <Cell key={i} handleClick={handleClick} value={v} idx={i} />;
+        return (
+          <Cell
+            key={i}
+            handleClick={handleClick}
+            handleMouseEnter={handleMouseEnter}
+            value={v}
+            idx={i}
+          />
+        );
       })}
     </div>
   );

@@ -34,6 +34,7 @@ function App() {
   const [board, setBoard] = useState(getInit(cols, rows));
   const [seed, setSeed] = useState(200);
   const [speed, setSpeed] = useState(100);
+  const [draw, setDraw] = useState(false)
 
   const clickRandom = (seed) => {
     console.log("RANDOM");
@@ -74,6 +75,8 @@ function App() {
         setStart={setStart}
         clickRandom={clickRandom}
         changeRes={changeRes}
+        draw={draw}
+        setDraw={setDraw}
       />
     </div>
   );

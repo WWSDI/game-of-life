@@ -15,12 +15,17 @@ export default function Control({
   setStart,
   clickRandom,
   changeRes
+  ,draw,setDraw
 }) {
   const handleClick = () => {
     console.log("⭐️", start);
     setStart(!start);
     console.log("new⭐️", start);
   };
+  const toggleDraw = () =>{
+    console.log('✏️',draw)
+    setDraw(!draw)
+  }
 
   return (
     <div>
@@ -73,6 +78,10 @@ export default function Control({
           value={seed}
         />
         <Button handleClick={() => clickRandom(seed)}>Random</Button>
+      </div>
+    
+      <div id="draw" className="container">
+        <Button handleClick={toggleDraw}>Draw (hold ctl key ^)</Button>
       </div>
     </div>
   );
