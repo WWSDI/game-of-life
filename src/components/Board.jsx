@@ -78,7 +78,7 @@ export default function Board({
   rows,
   start,
   setStart,
-  speed,
+  speed,setGeneration
 }) {
   const handleClick = ({ target: { attributes } }) => {
     const {
@@ -114,6 +114,7 @@ export default function Board({
         getFate(live, getNLN(board, getNeighbours(i, cols, rows), board)),
       );
       setBoard(newBoard);
+      setGeneration(gen => gen + 1)
     }, speed);
 
     return () => {

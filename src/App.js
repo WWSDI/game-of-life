@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import Board from "./components/Board";
 import Control from "./components/Control";
+import Setting from "./components/Setting";
 
 const getInit = (cols, rows) => {
   const bd = Array(cols * rows).fill(false);
@@ -27,6 +28,7 @@ const getInitRan = (cols, rows, numLiveCells) => {
 
 function App() {
   // default cols * rows = 40 * 30
+  const [generation, setGeneration] = useState(1);
   const [cols, setCols] = useState(40);
   const [rows, setRows] = useState(30);
   const [start, setStart] = useState(false);
@@ -34,25 +36,27 @@ function App() {
   const [board, setBoard] = useState(getInit(cols, rows));
   const [seed, setSeed] = useState(200);
   const [speed, setSpeed] = useState(100);
-  const [draw, setDraw] = useState(false)
+  const [draw, setDraw] = useState(false);
 
   const clickRandom = (seed) => {
     console.log("RANDOM");
     // const newBoard = getInitRan(cols, rows, seed);
     // console.log(newBoard);
     setBoard(getInitRan(cols, rows, seed));
+    setGeneration(1);
   };
 
   const changeRes = () => {
     document.getElementById("board").style.gridTemplateColumns = "1rem ".repeat(
       cols,
     );
-    setBoard(getInit(cols, rows))
+    setBoard(getInit(cols, rows));
+    setGeneration(1);
   };
 
   return (
     <div className="App">
-      {/* <Setting /> */}
+      <Setting generation={generation} />
       <Board
         board={board}
         setBoard={setBoard}
@@ -61,6 +65,7 @@ function App() {
         start={start}
         setStart={setStart}
         speed={speed}
+        setGeneration={setGeneration}
       />
       <Control
         cols={cols}
