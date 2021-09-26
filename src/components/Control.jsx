@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { getRow } from "./Board";
 import Button from "./Button";
 
 export default function Control({
@@ -8,6 +9,8 @@ export default function Control({
   setRows,
   seed,
   setSeed,
+  speed,
+  setSpeed,
   start,
   setStart,
   clickRandom,
@@ -20,34 +23,56 @@ export default function Control({
 
   return (
     <div>
-      <label>Cols:</label>
-      <input
-        type="number"
-        onChange={(e) => {
-          setCols(e.target.value);
-        }}
-        value={cols}
-      />
-      <label>Rows:</label>
-      <input
-        type="number"
-        onChange={(e) => {
-          setRows(e.target.value);
-        }}
-        value={rows}
-      />
+      <div className="container">
+        <label>Cols:</label>
+        <input
+          type="number"
+          onChange={(e) => {
+            setCols(() => Number(e.target.value));
+            console.log("COLS", cols);
+          }}
+          value={cols}
+        />
+        <h2>{cols}</h2>
+        <label>Rows:</label>
+        <input
+          type="number"
+          onChange={(e) => {
+            setRows(Number(e.target.value));
+            console.log("ROWS", e.target.value, rows);
+          }}
+          value={rows}
+        />
+        <h2>{rows}</h2>
+        <Button>Change Board</Button>
+      </div>
 
-      <Button handleClick={handleClick}>▶️ Start | ⏸ Pause</Button>
-      <Button>⥅ Step</Button>
-      <label>Seed Number</label>
-      <input
-        type="number"
-        onChange={(e) => {
-          setSeed(e.target.value);
-        }}
-        value={seed}
-      />
-      <Button handleClick={() => clickRandom(seed)}>Random</Button>
+      <div className="container">
+        <Button handleClick={handleClick}>▶️ Start | ⏸ Pause</Button>
+        <input
+          type="range"
+          value={speed}
+          min={0}
+          max={1000}
+          step={20}
+          onChange={(e) => {
+            setSpeed(e.target.value);
+          }}
+        />
+        <Button>⥅ Step</Button>
+      </div>
+
+      <div className="container">
+        <label>Seed Number</label>
+        <input
+          type="number"
+          onChange={(e) => {
+            setSeed(e.target.value);
+          }}
+          value={seed}
+        />
+        <Button handleClick={() => clickRandom(seed)}>Random</Button>
+      </div>
     </div>
   );
 }

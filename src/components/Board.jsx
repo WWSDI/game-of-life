@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Cell from "./Cell";
 import styles from "./styles.module.css";
 
@@ -10,8 +10,8 @@ Any dead cell with exactly three live neighbours becomes a live cell, as if by r
 
 
 */
-const getCol = (idx, cols, rows) => idx % cols;
-const getRow = (idx, cols, rows) => Math.floor(idx / cols);
+const getCol = (idx, cols) => idx % cols;
+export const getRow = (idx, cols) => Math.floor(idx / cols);
 const hasTopRow = (idx, cols, rows) => {
   return getRow(idx, cols, rows) !== 0 ? true : false;
 };
@@ -78,11 +78,9 @@ export default function Board({
   rows,
   start,
   setStart,
+  speed,
 }) {
   const handleClick = ({ target: { attributes } }) => {
-    // toggle the Cell on/off
-    // if (e.target?.value) return false;
-    // else return true;
     const {
       idx: { value: idx },
     } = attributes;
@@ -102,18 +100,18 @@ export default function Board({
 
   useEffect(() => {
     console.log("🌸", start);
-    if (start) {
+    setTimeout(() => {
+      if (!start) return;
       const newBoard = board.map((live, i) =>
         getFate(live, getNLN(board, getNeighbours(i, cols, rows), board)),
       );
       setBoard(newBoard);
-    }
+    }, speed);
 
     return () => {
-      setTimeout(() => {}, 100);
       // setStart(false);
     };
-  }, [start, board, cols, rows]);
+  }, [start, board, cols, rows, setBoard, speed, setStart]);
 
   return (
     <div className={styles.board}>

@@ -1,7 +1,7 @@
 .board {
   display: grid;
   /* grid-gap: 1px; */
-  grid-template-columns: repeat(40, 1rem);
+  grid-template-columns: repeat(50, 1rem);
   border: 1rem solid black;
 }
 
@@ -21,7 +21,7 @@
   background-color: green;
 }
 
-.control{
+.container{
   display: flex;
 
 }

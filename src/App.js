@@ -16,7 +16,6 @@ const getInit = (cols, rows) => {
 const randomise = (bd, numLiveCells, cols, rows) => {
   for (let index = 0; index < numLiveCells; index++) {
     const j = Math.floor(Math.random() * cols * rows);
-    console.log(j)
     bd[j] = true;
   }
 };
@@ -31,9 +30,10 @@ function App() {
   const [cols, setCols] = useState(40);
   const [rows, setRows] = useState(30);
   const [start, setStart] = useState(false);
-  const [delay, setDelay] = useState(100);
+  // const [delay, setDelay] = useState(100);
   const [board, setBoard] = useState(getInit(cols, rows));
-  const [seed, setSeed] = useState(150);
+  const [seed, setSeed] = useState(200);
+  const [speed, setSpeed] = useState(100)
 
   const clickRandom = (seed) => {
     console.log("RANDOM");
@@ -41,6 +41,8 @@ function App() {
     // console.log(newBoard);
     setBoard(getInitRan(cols, rows, seed));
   };
+
+  // const changeSlide = 
 
   return (
     <div className="App">
@@ -52,12 +54,15 @@ function App() {
         rows={rows}
         start={start}
         setStart={setStart}
+        speed={speed}
       />
       <Control
         cols={cols}
         setCols={setCols}
         rows={rows}
         setRows={setRows}
+        speed={speed}
+        setSpeed={setSpeed}
         seed={seed}
         setSeed={setSeed}
         start={start}
