@@ -114,7 +114,7 @@ export default function Board({
   }, [start, board, cols, rows, setBoard, speed, setStart]);
 
   return (
-    <div className={styles.board}>
+    <div className={styles.board} id="board">
       {board.map((v, i) => {
         return <Cell key={i} handleClick={handleClick} value={v} idx={i} />;
       })}

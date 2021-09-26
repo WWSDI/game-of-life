@@ -33,7 +33,7 @@ function App() {
   // const [delay, setDelay] = useState(100);
   const [board, setBoard] = useState(getInit(cols, rows));
   const [seed, setSeed] = useState(200);
-  const [speed, setSpeed] = useState(100)
+  const [speed, setSpeed] = useState(100);
 
   const clickRandom = (seed) => {
     console.log("RANDOM");
@@ -42,7 +42,12 @@ function App() {
     setBoard(getInitRan(cols, rows, seed));
   };
 
-  // const changeSlide = 
+  const changeRes = () => {
+    document.getElementById("board").style.gridTemplateColumns = "1rem ".repeat(
+      cols,
+    );
+    setBoard(getInit(cols, rows))
+  };
 
   return (
     <div className="App">
@@ -68,6 +73,7 @@ function App() {
         start={start}
         setStart={setStart}
         clickRandom={clickRandom}
+        changeRes={changeRes}
       />
     </div>
   );

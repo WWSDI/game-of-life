@@ -14,6 +14,7 @@ export default function Control({
   start,
   setStart,
   clickRandom,
+  changeRes
 }) {
   const handleClick = () => {
     console.log("⭐️", start);
@@ -33,7 +34,7 @@ export default function Control({
           }}
           value={cols}
         />
-        <h2>{cols}</h2>
+        {/* <h2>{cols}</h2> */}
         <label>Rows:</label>
         <input
           type="number"
@@ -43,8 +44,8 @@ export default function Control({
           }}
           value={rows}
         />
-        <h2>{rows}</h2>
-        <Button>Change Board</Button>
+        {/* <h2>{rows}</h2> */}
+        <Button handleClick={changeRes}>Change Resolution</Button>
       </div>
 
       <div className="container">
