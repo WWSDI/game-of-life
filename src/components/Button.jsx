@@ -1,4 +1,4 @@
-import styles from "./styles.module.css";
+import styles from "./button.module.css";
 
 export default function Button({ handleClick, children }) {
   return (

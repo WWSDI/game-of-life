@@ -1,0 +1,19 @@
+.cell {
+  display: inline-block;
+  box-sizing: border-box;
+  width: var(--cellWidth);
+  height: var(--cellWidth);
+  border-bottom: 0.05rem solid gray;
+  border-right: 0.05rem solid gray;
+}
+.cellOff {
+  background-color: rgba(0, 0, 0, 0.715);
+}
+
+.cellOn {
+  background-color: green;
+}
+
+.container {
+  display: flex;
+}

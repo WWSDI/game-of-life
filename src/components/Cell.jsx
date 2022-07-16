@@ -1,4 +1,4 @@
-import styles from "./styles.module.css";
+import styles from "./cell.module.css";
 
 export default function Cell({ handleClick, value, idx, handleMouseEnter }) {
   return (

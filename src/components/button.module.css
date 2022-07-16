@@ -1,0 +1,15 @@
+.button {
+  display: inline-block;
+  height: 2rem;
+  padding: 0.5rem;
+  border: 2px solid gray;
+  border-radius: 1rem;
+  background-color: rgb(156, 236, 34);
+  cursor: pointer;
+}
+.button:hover {
+  background-color: greenyellow;
+}
+.button:active {
+  background-color: rgb(134, 206, 24);
+}

@@ -1,0 +1,32 @@
+
+body {
+  text-align: center;
+}
+
+.board {
+  margin: 1rem auto;
+  display: grid;
+  grid-template-columns: repeat(var(--cols), var(--cellWidth));
+  border: 1rem solid black;
+  max-width: fit-content;
+}
+
+.container {
+  display: flex;
+}
+
+.button {
+  display: inline-block;
+  height: 2rem;
+  padding: 0.5rem;
+  border: 2px solid gray;
+  border-radius: 1rem;
+  background-color: rgb(156, 236, 34);
+  cursor: pointer;
+}
+.button:hover {
+  background-color: greenyellow;
+}
+.button:active {
+  background-color: rgb(134, 206, 24);
+}

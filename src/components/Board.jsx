@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react";
 import Cell from "./Cell";
-import styles from "./styles.module.css";
+import styles from "./board.module.css";
 
 // Four rules:
 /* Any live cell with fewer than two live neighbours dies, as if by underpopulation.
