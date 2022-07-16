@@ -14,15 +14,15 @@ const getInit = (cols, rows) => {
   bd[236] = true;
   return bd;
 };
-const randomise = (bd, numLiveCells, cols, rows) => {
-  for (let index = 0; index < numLiveCells; index++) {
+const randomise = (bd, numofLiveCells, cols, rows) => {
+  for (let index = 0; index < numofLiveCells; index++) {
     const j = Math.floor(Math.random() * cols * rows);
     bd[j] = true;
   }
 };
-const getInitRan = (cols, rows, numLiveCells) => {
+const getInitRan = (cols, rows, numofLiveCells) => {
   const bd = Array(cols * rows).fill(false);
-  randomise(bd, numLiveCells, cols, rows);
+  randomise(bd, numofLiveCells, cols, rows);
   return bd;
 };
 
