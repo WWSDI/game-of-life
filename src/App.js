@@ -35,8 +35,7 @@ function App() {
   // const [delay, setDelay] = useState(100);
   const [board, setBoard] = useState(getInit(cols, rows));
   const [seed, setSeed] = useState(200);
-  const [speed, setSpeed] = useState(100);
-
+  const [speed, setSpeed] = useState(50);
 
   const clickRandom = (seed) => {
     console.log("RANDOM");

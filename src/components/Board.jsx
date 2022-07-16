@@ -121,7 +121,7 @@ export default function Board({
     setTimeout(() => {
       if (!start) return;
       const newBoard = board.map((live, i) =>
-        getFate(live, getNLN(board, getNeighbours(i, cols, rows), board)),
+        getFate(live, getNLN(board, getNeighbours_nonMemo(i, cols, rows), board)),
       );
       setBoard(newBoard);
       setGeneration((gen) => gen + 1);
