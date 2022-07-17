@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import Cell from "./Cell";
 import styles from "./board.module.css";
 import {
@@ -15,8 +15,14 @@ export default function Board({
   start,
   setStart,
   speed,
+  generation,
   setGeneration,
+  random,
+  setRandom,
+  seed,
 }) {
+  const getNeighbours = getNeighbours_nonMemo;
+
   const handleClick = ({ target: { attributes } }) => {
     const {
       idx: { value: idx },
@@ -41,27 +47,35 @@ export default function Board({
   };
 
   useEffect(() => {
-    console.log("🌸");
+    console.log("<Board>: useEffect");
+    if (!start) return;
+
     setTimeout(() => {
-      if (!start) return;
-      const newBoard = board.map((live, i) =>
+      const newBoard = board.map((liveCell, i) =>
         getFate(
-          live,
-          getNumofLiveNeighbours(
-            board,
-            getNeighbours_nonMemo(i, cols, rows),
-            board
-          )
+          liveCell,
+          getNumofLiveNeighbours(board, getNeighbours(i, cols, rows), board)
         )
       );
-      setBoard(newBoard);
-      setGeneration((gen) => gen + 1);
-    }, speed);
 
-    return () => {
-      // setStart(false);
-    };
-  }, [start, board, cols, rows, setBoard, speed, setStart, setGeneration]);
+      if (start) {
+        setBoard(newBoard);
+        setGeneration((gen) => gen + 1);
+        console.log("<Board>: render next gen");
+      }
+    }, speed);
+  }, [
+    start,
+    random,
+    board,
+    cols,
+    rows,
+    setBoard,
+    speed,
+    setStart,
+    setGeneration,
+    getNeighbours,
+  ]);
 
   return (
     <div className={styles.board} id="board">

@@ -1,4 +1,5 @@
 import Button from "./Button";
+import { getInit, getInitRan } from "../utils/boardUtils";
 
 export default function Control({
   cols,
@@ -11,13 +12,37 @@ export default function Control({
   setSpeed,
   start,
   setStart,
-  clickRandom,
-  changeRes
+  setBoard,
+  generation,
+  setGeneration,
 }) {
-  const handleClick = () => {
-    console.log("⭐️", start);
+  const handleStartStop = () => {
+    console.log("⭐️ start/stop clicked: current gen:", generation);
     setStart(!start);
-    console.log("new⭐️", start);
+  };
+
+  const clickRandom = (seed) => {
+    console.log("⭐️ about to use RANDOM BOARD");
+    if (!start) {
+      setBoard(getInitRan(cols, rows, seed));
+      setGeneration(1);
+      return
+    }
+
+    setStart(false);
+    // very inelegant way to make it sync
+    setTimeout(() => {
+      setBoard(getInitRan(cols, rows, seed));
+      setGeneration(1);
+    }, 200);
+  };
+
+  const changeRes = () => {
+    document.getElementById("board").style.gridTemplateColumns = "1rem ".repeat(
+      cols
+    );
+    setBoard(getInit(cols, rows));
+    setGeneration(1);
   };
 
   return (
@@ -47,7 +72,7 @@ export default function Control({
       </div>
 
       <div className="container">
-        <Button handleClick={handleClick}>▶️ Start | ⏸ Pause</Button>
+        <Button handleClick={handleStartStop}>⏯</Button>
         <input
           type="range"
           value={speed}
@@ -73,9 +98,9 @@ export default function Control({
         />
         <Button handleClick={() => clickRandom(seed)}>Random</Button>
       </div>
-    
+
       <div id="draw" className="container">
-        <Button >Draw (hold ctl key ^)</Button>
+        <Button>Draw (hold ctl key ^)</Button>
       </div>
     </div>
   );

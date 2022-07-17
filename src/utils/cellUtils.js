@@ -1,10 +1,3 @@
-// Four rules:
-/* Any live cell with fewer than two live neighbours dies, as if by underpopulation.
-Any live cell with two or three live neighbours lives on to the next generation.
-Any live cell with more than three live neighbours dies, as if by overpopulation.
-Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
-*/
-
 // calculate cell's column index based on its index
 // getCol probably should have been named as getY wherein Y means index on Y-axis
 const getCol = (idx, cols) => idx % cols;
@@ -29,11 +22,20 @@ export const getNumofLiveNeighbours = (board, neighbours) => {
   return numofLiveNeighbours;
 };
 
-// calculate if the cell is dead or alive in the next generation
+// calculate if the cell is dead or live in the next generation
 export const getFate = (live, numofLiveNeighbours) => {
+  // Four rules of fate:
+  /* Any live cell with fewer than two live neighbours dies, as if by underpopulation.
+Any live cell with two or three live neighbours lives on to the next generation.
+Any live cell with more than three live neighbours dies, as if by overpopulation.
+Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
+*/
   if (live) {
-    return numofLiveNeighbours < 2 ? false : numofLiveNeighbours === 2;
-    // || numofLiveNeighbours === 3 ? true : false;
+    return numofLiveNeighbours < 2
+      ? false
+      : numofLiveNeighbours === 2 || numofLiveNeighbours === 3
+      ? true
+      : false;
   } else {
     return numofLiveNeighbours === 3 ? true : false;
   }

@@ -1,57 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Board from "./components/Board";
 import Control from "./components/Control";
 import Setting from "./components/Setting";
+import { getInitRan } from "./utils/boardUtils";
 
-const getInit = (cols, rows) => {
-  const bd = Array(cols * rows).fill(false);
-  bd[156] = true;
-  bd[157] = true;
-  bd[158] = true;
-  bd[234] = true;
-  bd[233] = true;
-  bd[236] = true;
-  return bd;
-};
-const randomise = (bd, numofLiveCells, cols, rows) => {
-  for (let index = 0; index < numofLiveCells; index++) {
-    const j = Math.floor(Math.random() * cols * rows);
-    bd[j] = true;
-  }
-};
-const getInitRan = (cols, rows, numofLiveCells) => {
-  const bd = Array(cols * rows).fill(false);
-  randomise(bd, numofLiveCells, cols, rows);
-  return bd;
+const useStateWithCallback = (initialValue) => {
+  const [value, setValue] = useState(initialValue);
+
+  const setValueAndCallback = (newValue, callback) => {
+    setValue((prevValue) => {
+      if (callback) {
+        callback(prevValue, newValue);
+      }
+      return newValue;
+    });
+  };
+
+  return [value, setValueAndCallback];
 };
 
 function App() {
-  // default cols * rows = 40 * 30
   const [generation, setGeneration] = useState(1);
+  // default cols * rows = 40 * 30
   const [cols, setCols] = useState(40);
   const [rows, setRows] = useState(30);
   const [start, setStart] = useState(false);
   // const [delay, setDelay] = useState(100);
-  const [board, setBoard] = useState(getInit(cols, rows));
-  const [seed, setSeed] = useState(200);
-  const [speed, setSpeed] = useState(50);
-
-  const clickRandom = (seed) => {
-    console.log("RANDOM");
-    // const newBoard = getInitRan(cols, rows, seed);
-    // console.log(newBoard);
-    setBoard(getInitRan(cols, rows, seed));
-    setGeneration(1);
-  };
-
-  const changeRes = () => {
-    document.getElementById("board").style.gridTemplateColumns = "1rem ".repeat(
-      cols,
-    );
-    setBoard(getInit(cols, rows));
-    setGeneration(1);
-  };
+  const [random, setRandom] = useState(false);
+  const [seed, setSeed] = useState(800);
+  const [speed, setSpeed] = useState(200);
+  const [board, setBoard] = useState(getInitRan(cols, rows, seed));
 
   return (
     <div className="App">
@@ -64,7 +43,11 @@ function App() {
         start={start}
         setStart={setStart}
         speed={speed}
+        generation={generation}
         setGeneration={setGeneration}
+        random={random}
+        setRandom={setRandom}
+        seed={seed}
       />
       <Control
         cols={cols}
@@ -77,8 +60,9 @@ function App() {
         setSeed={setSeed}
         start={start}
         setStart={setStart}
-        clickRandom={clickRandom}
-        changeRes={changeRes}
+        generation={generation}
+        setGeneration={setGeneration}
+        setBoard={setBoard}
       />
     </div>
   );
