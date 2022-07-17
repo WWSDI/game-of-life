@@ -59,7 +59,7 @@ export default function Control({
 
   return (
     <div>
-      <div className="container">
+      <div id="changeColorTheme" className="container">
         <select value={theme} onChange={changeTheme}>
           <option value="vividRainbow">Change Color Theme</option>
           <option value="dimRainbow">Vivid Rainbow</option>
@@ -71,7 +71,8 @@ export default function Control({
           <option value="cherryblossom">Cherry Blossom</option>
         </select>
       </div>
-      <div className="container">
+
+      <div id="changeResolution" className="container">
         <label>Cols:</label>
         <input
           type="number"
@@ -95,7 +96,7 @@ export default function Control({
         <Button handleClick={changeRes}>Change Resolution</Button>
       </div>
 
-      <div className="container">
+      <div id="startStop" className="container">
         <Button handleClick={handleStartStop}>⏯</Button>
         <input
           type="range"
@@ -111,7 +112,7 @@ export default function Control({
         <Button>⥅ Step</Button>
       </div>
 
-      <div className="container">
+      <div id="seedRandomBoard" className="container">
         <label>Seed Number</label>
         <input
           type="number"
