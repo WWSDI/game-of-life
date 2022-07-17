@@ -15,6 +15,7 @@ function App() {
   const [speed, setSpeed] = useState(0);
   // a possible way to improve performance is to use object intead of boolean for cell value
   const [board, setBoard] = useState(getInitRan(cols, rows, seed));
+  const [theme, setTheme] = useState("vividRainbow");
 
   return (
     <div className="App">
@@ -30,6 +31,7 @@ function App() {
         generation={generation}
         setGeneration={setGeneration}
         seed={seed}
+        theme={theme}
       />
       <Control
         cols={cols}
@@ -45,6 +47,8 @@ function App() {
         generation={generation}
         setGeneration={setGeneration}
         setBoard={setBoard}
+        theme={theme}
+        setTheme={setTheme}
       />
     </div>
   );

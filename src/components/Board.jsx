@@ -15,6 +15,7 @@ export default function Board({
   setStart,
   speed,
   setGeneration,
+  theme
 }) {
   const savedInterval = useRef();
   console.log("❤️", savedInterval);
@@ -86,6 +87,7 @@ export default function Board({
             handleMouseEnter={handleMouseEnter}
             value={v}
             idx={i}
+            theme={theme}
           />
         );
       })}

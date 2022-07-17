@@ -26,7 +26,7 @@ const themes = {
       green: [150, 50],
       blue: [200, 30],
     },
-    dead: [0, 0, 0, 0.915],
+    dead: [245, 245, 245, 0.915],
   },
   flame: {
     live: {
@@ -66,13 +66,13 @@ const themes = {
   },
 };
 
-export default function Cell({ handleClick, value, idx, handleMouseEnter }) {
+export default function Cell({ handleClick, value, idx, handleMouseEnter, theme }) {
   return (
     <div
       onClick={handleClick}
       onMouseEnter={handleMouseEnter}
       className={`${styles.cell}`}
-      style={selectTheme(themes, "mono", value)}
+      style={selectTheme(themes, theme, value)}
       value={value}
       idx={idx}
     ></div>

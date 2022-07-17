@@ -1,5 +1,6 @@
 import Button from "./Button";
 import { getInitRan } from "../utils/boardUtils";
+import { useState } from "react";
 
 export default function Control({
   cols,
@@ -15,7 +16,13 @@ export default function Control({
   setBoard,
   generation,
   setGeneration,
+  theme,
+  setTheme
 }) {
+  const changeTheme = (event) => {
+    setTheme(event.target.value);
+  };
+
   const handleStartStop = () => {
     console.log("⭐️ start/stop clicked: current gen:", generation);
     setStart(!start);
@@ -48,8 +55,22 @@ export default function Control({
     }, 200);
   };
 
+  
+
   return (
     <div>
+      <div className="container">
+        <select value={theme} onChange={changeTheme}>
+          <option value="vividRainbow">Change Color Theme</option>
+          <option value="dimRainbow">Vivid Rainbow</option>
+          <option value="matrix">Matrix</option>
+          <option value="mono">Mono Green</option>
+          <option value="finland">Finland</option>
+          <option value="sky">Sky</option>
+          <option value="flame">Flame</option>
+          <option value="cherryblossom">Cherry Blossom</option>
+        </select>
+      </div>
       <div className="container">
         <label>Cols:</label>
         <input
