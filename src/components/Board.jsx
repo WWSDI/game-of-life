@@ -3,8 +3,7 @@ import Cell from "./Cell";
 import styles from "./board.module.css";
 import {
   getNumofLiveNeighbours,
-  getFate,
-  getNeighbours,
+  getNextGen,
 } from "../utils/cellUtils";
 
 export default function Board({
@@ -49,10 +48,10 @@ export default function Board({
       };
 
     savedInterval.current = setTimeout(() => {
-      const newBoard = board.map((liveCell, i) =>
-        getFate(
-          liveCell,
-          getNumofLiveNeighbours(board, getNeighbours(i, cols, rows), board)
+      const newBoard = board.map((alive, i) =>
+        getNextGen(
+          alive,
+          getNumofLiveNeighbours(i, cols, board)
         )
       );
 
@@ -75,7 +74,6 @@ export default function Board({
     speed,
     setStart,
     setGeneration,
-    getNeighbours,
   ]);
 
   return (
