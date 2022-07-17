@@ -38,29 +38,21 @@ export default function Board({
 
   useEffect(() => {
     console.log("<Board>: useEffect");
-    if (!start)
-      return () => {
-        console.log("clearing set");
-        clearInterval(savedInterval.current);
-        savedInterval.current = null;
-      };
+    if (!start) return;
 
-    savedInterval.current = setTimeout(() => {
-      const newBoard = board.map((alive, i) =>
-        getNextGen(alive, getNumofLiveNeighbours(i, cols, board))
-      );
+    const newBoard = board.map((alive, i) =>
+      getNextGen(alive, getNumofLiveNeighbours(i, cols, board))
+    );
 
+    setTimeout(() => {
       if (start) {
         setBoard(newBoard);
         setGeneration((gen) => gen + 1);
         console.log("<Board>: render next gen");
       }
-    }, speed);
-
-    console.log("*** interval", savedInterval.current);
-
-    // return ;
-  }, [start, board, cols, rows, setBoard, speed, setStart, setGeneration]);
+    }, 1000 - speed);
+    
+  }, [start, board]);
 
   return (
     <div
