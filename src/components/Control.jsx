@@ -38,10 +38,13 @@ export default function Control({
   };
 
   const changeRes = () => {
-    document.getElementById("board").style.gridTemplateColumns = "1rem ".repeat(
-      cols
-    );
-    setBoard(getInit(cols, rows));
+    document.querySelector(":root").getElementsByClassName.setProperty('--cols', cols)
+    
+
+    // document.getElementById("board").style.gridTemplateColumns = "".repeat(
+    //   `cols 0.5rem `
+    // );
+    setBoard(getInitRan(cols, rows, seed));
     setGeneration(1);
   };
 
@@ -80,7 +83,7 @@ export default function Control({
           max={1000}
           step={20}
           onChange={(e) => {
-            setSpeed(e.target.value);
+            setSpeed(Number(e.target.value));
           }}
         />
         <span>{speed}</span>
