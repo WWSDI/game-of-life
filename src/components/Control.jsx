@@ -17,7 +17,7 @@ export default function Control({
   generation,
   setGeneration,
   theme,
-  setTheme
+  setTheme,
 }) {
   const changeTheme = (event) => {
     setTheme(event.target.value);
@@ -54,8 +54,6 @@ export default function Control({
       setGeneration(1);
     }, 200);
   };
-
-  
 
   return (
     <div>
@@ -98,6 +96,9 @@ export default function Control({
 
       <div id="startStop" className="container">
         <Button handleClick={handleStartStop}>⏯</Button>
+      </div>
+
+      <div id="step" className="container">
         <input
           type="range"
           value={speed}
@@ -109,7 +110,7 @@ export default function Control({
           }}
         />
         <span>{speed}</span>
-        <Button>⥅ Step</Button>
+        <Button>Step to Next Generation</Button>
       </div>
 
       <div id="seedRandomBoard" className="container">

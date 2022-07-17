@@ -5,7 +5,6 @@ export const liveCellStyle = (color) => {
   if (typeof color === "string") return { background: color };
   
   const { red, green, blue } = color;
-  console.log(`rgb( ${randomIntInRange(red)}, ${randomIntInRange(green)}, ${randomIntInRange(blue)})`);
   return {
     background: `rgb( ${randomIntInRange(red)}, ${randomIntInRange(green)}, 
   ${randomIntInRange(blue)})`,

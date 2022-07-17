@@ -1,10 +1,7 @@
 import { useEffect, useRef } from "react";
 import Cell from "./Cell";
 import styles from "./board.module.css";
-import {
-  getNumofLiveNeighbours,
-  getNextGen,
-} from "../utils/cellUtils";
+import { getNumofLiveNeighbours, getNextGen } from "../utils/cellUtils";
 
 export default function Board({
   board,
@@ -15,13 +12,13 @@ export default function Board({
   setStart,
   speed,
   setGeneration,
-  theme
+  theme,
 }) {
   const savedInterval = useRef();
-  console.log("❤️", savedInterval);
+  // console.log("❤️", savedInterval);
 
-  const handleClick = ({ target: { attributes } }) => {
-    const { value: idx } = attributes.idx;
+  const handleClick = (e) => {
+    const { value: idx } = e.target.attributes.idx;
 
     const newValue = !board[idx];
     const newBoard = [...board];
@@ -50,10 +47,7 @@ export default function Board({
 
     savedInterval.current = setTimeout(() => {
       const newBoard = board.map((alive, i) =>
-        getNextGen(
-          alive,
-          getNumofLiveNeighbours(i, cols, board)
-        )
+        getNextGen(alive, getNumofLiveNeighbours(i, cols, board))
       );
 
       if (start) {
@@ -66,24 +60,19 @@ export default function Board({
     console.log("*** interval", savedInterval.current);
 
     // return ;
-  }, [
-    start,
-    board,
-    cols,
-    rows,
-    setBoard,
-    speed,
-    setStart,
-    setGeneration,
-  ]);
+  }, [start, board, cols, rows, setBoard, speed, setStart, setGeneration]);
 
   return (
-    <div className={styles.board} id="board">
+    <div
+      className={styles.board}
+      id="board"
+      onClick={handleClick}
+      // onMouseEnter={handleMouseEnter}
+    >
       {board.map((v, i) => {
         return (
           <Cell
             key={i}
-            handleClick={handleClick}
             handleMouseEnter={handleMouseEnter}
             value={v}
             idx={i}
