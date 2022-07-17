@@ -16,35 +16,10 @@ export const hasRightCol = (idx, cols) => {
   return getCol(idx, cols) !== cols - 1 ? true : false;
 };
 
-export const getNumofLiveNeighbours = (board, neighbours) => {
-  const state = neighbours.map((n) => board[n]);
-  const numofLiveNeighbours = state.filter((s) => s === true).length;
-  return numofLiveNeighbours;
-};
-
-// calculate if the cell is dead or live in the next generation
-export const getFate = (live, numofLiveNeighbours) => {
-  // Four rules of fate:
-  /* Any live cell with fewer than two live neighbours dies, as if by underpopulation.
-Any live cell with two or three live neighbours lives on to the next generation.
-Any live cell with more than three live neighbours dies, as if by overpopulation.
-Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
-*/
-  if (live) {
-    return numofLiveNeighbours < 2
-      ? false
-      : numofLiveNeighbours === 2 || numofLiveNeighbours === 3
-      ? true
-      : false;
-  } else {
-    return numofLiveNeighbours === 3 ? true : false;
-  }
-};
-
-export const getNeighbours_nonMemo = (idx, cols, rows) => {
+export const getNeighbours = (idx, cols, rows) => {
   // neighbours 1-8
   //   n1 n2 n3
-  //   n4 c  n4
+  //   n4 c  n5
   //   n6 n7 n8
   const n1 = idx - cols - 1;
   const n2 = idx - cols;
@@ -77,3 +52,30 @@ export const getNeighbours_nonMemo = (idx, cols, rows) => {
 
   return neighbours.flat();
 };
+
+
+export const getNumofLiveNeighbours = (board, neighbours) => {
+  const state = neighbours.map((n) => board[n]);
+  const numofLiveNeighbours = state.filter((s) => s === true).length;
+  return numofLiveNeighbours;
+};
+
+// calculate if the cell is dead or live in the next generation
+export const getFate = (live, numofLiveNeighbours) => {
+  // Four rules of fate:
+  /* Any live cell with fewer than two live neighbours dies, as if by underpopulation.
+Any live cell with two or three live neighbours lives on to the next generation.
+Any live cell with more than three live neighbours dies, as if by overpopulation.
+Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
+*/
+  if (live) {
+    return numofLiveNeighbours < 2
+      ? false
+      : numofLiveNeighbours === 2 || numofLiveNeighbours === 3
+      ? true
+      : false;
+  } else {
+    return numofLiveNeighbours === 3 ? true : false;
+  }
+};
+

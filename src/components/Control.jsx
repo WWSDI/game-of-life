@@ -1,5 +1,5 @@
 import Button from "./Button";
-import { getInit, getInitRan } from "../utils/boardUtils";
+import { getInitRan } from "../utils/boardUtils";
 
 export default function Control({
   cols,

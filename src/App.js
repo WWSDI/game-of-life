@@ -1,24 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import Board from "./components/Board";
 import Control from "./components/Control";
 import Setting from "./components/Setting";
 import { getInitRan } from "./utils/boardUtils";
-
-const useStateWithCallback = (initialValue) => {
-  const [value, setValue] = useState(initialValue);
-
-  const setValueAndCallback = (newValue, callback) => {
-    setValue((prevValue) => {
-      if (callback) {
-        callback(prevValue, newValue);
-      }
-      return newValue;
-    });
-  };
-
-  return [value, setValueAndCallback];
-};
 
 function App() {
   const [generation, setGeneration] = useState(1);

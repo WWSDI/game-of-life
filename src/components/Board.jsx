@@ -4,7 +4,7 @@ import styles from "./board.module.css";
 import {
   getNumofLiveNeighbours,
   getFate,
-  getNeighbours_nonMemo,
+  getNeighbours,
 } from "../utils/cellUtils";
 
 export default function Board({
@@ -17,7 +17,6 @@ export default function Board({
   speed,
   setGeneration,
 }) {
-  const getNeighbours = getNeighbours_nonMemo;
   const savedInterval = useRef();
   console.log("❤️", savedInterval);
 
@@ -42,11 +41,12 @@ export default function Board({
 
   useEffect(() => {
     console.log("<Board>: useEffect");
-    if (!start) return () => {
-      console.log("clearing set")
-      clearInterval(savedInterval.current);
-      savedInterval.current = null
-    }
+    if (!start)
+      return () => {
+        console.log("clearing set");
+        clearInterval(savedInterval.current);
+        savedInterval.current = null;
+      };
 
     savedInterval.current = setTimeout(() => {
       const newBoard = board.map((liveCell, i) =>
