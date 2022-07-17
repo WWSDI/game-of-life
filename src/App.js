@@ -24,12 +24,11 @@ function App() {
   const [generation, setGeneration] = useState(1);
   // default cols * rows = 40 * 30
   const [cols, setCols] = useState(40);
-  const [rows, setRows] = useState(30);
+  const [rows, setRows] = useState(40);
   const [start, setStart] = useState(false);
-  // const [delay, setDelay] = useState(100);
-  const [random, setRandom] = useState(false);
   const [seed, setSeed] = useState(800);
-  const [speed, setSpeed] = useState(200);
+  const [speed, setSpeed] = useState(0);
+  // a possible way to improve performance is to use object intead of boolean for cell value
   const [board, setBoard] = useState(getInitRan(cols, rows, seed));
 
   return (
@@ -45,8 +44,6 @@ function App() {
         speed={speed}
         generation={generation}
         setGeneration={setGeneration}
-        random={random}
-        setRandom={setRandom}
         seed={seed}
       />
       <Control

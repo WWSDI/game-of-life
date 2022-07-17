@@ -26,7 +26,7 @@ export default function Control({
     if (!start) {
       setBoard(getInitRan(cols, rows, seed));
       setGeneration(1);
-      return
+      return;
     }
 
     setStart(false);
@@ -38,14 +38,14 @@ export default function Control({
   };
 
   const changeRes = () => {
-    document.querySelector(":root").getElementsByClassName.setProperty('--cols', cols)
-    
-
-    // document.getElementById("board").style.gridTemplateColumns = "".repeat(
-    //   `cols 0.5rem `
-    // );
-    setBoard(getInitRan(cols, rows, seed));
-    setGeneration(1);
+    if (start) {
+      setStart(false);
+    }
+    setTimeout(() => {
+      document.querySelector(":root").style.setProperty("--cols", cols);
+      setBoard(getInitRan(cols, rows, seed));
+      setGeneration(1);
+    }, 200);
   };
 
   return (

@@ -1,5 +1,5 @@
 /* These variables are of global scope */
 :root {
-  --cellWidth: 0.6rem;
+  --cellWidth: 0.5rem;
   --cols: 40;
 }

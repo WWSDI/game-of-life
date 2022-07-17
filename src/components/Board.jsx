@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Cell from "./Cell";
 import styles from "./board.module.css";
 import {
@@ -15,24 +15,18 @@ export default function Board({
   start,
   setStart,
   speed,
-  generation,
   setGeneration,
-  random,
-  setRandom,
-  seed,
 }) {
   const getNeighbours = getNeighbours_nonMemo;
+  const savedInterval = useRef();
+  console.log("❤️", savedInterval);
 
   const handleClick = ({ target: { attributes } }) => {
-    const {
-      idx: { value: idx },
-    } = attributes;
+    const { value: idx } = attributes.idx;
 
     const newValue = !board[idx];
     const newBoard = [...board];
     newBoard[idx] = newValue;
-    // console.log("😃", "col", getCol(Number(idx), cols, rows));
-    // console.log("😃", "row", getRow(Number(idx), cols, rows));
     setBoard(newBoard);
   };
 
@@ -48,9 +42,13 @@ export default function Board({
 
   useEffect(() => {
     console.log("<Board>: useEffect");
-    if (!start) return;
+    if (!start) return () => {
+      console.log("clearing set")
+      clearInterval(savedInterval.current);
+      savedInterval.current = null
+    }
 
-    setTimeout(() => {
+    savedInterval.current = setTimeout(() => {
       const newBoard = board.map((liveCell, i) =>
         getFate(
           liveCell,
@@ -64,9 +62,12 @@ export default function Board({
         console.log("<Board>: render next gen");
       }
     }, speed);
+
+    console.log("*** interval", savedInterval.current);
+
+    // return ;
   }, [
     start,
-    random,
     board,
     cols,
     rows,
