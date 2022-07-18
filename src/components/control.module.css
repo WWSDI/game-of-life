@@ -1,0 +1,42 @@
+.changeCorlorTheme {
+  grid-area: a;
+}
+.changeResolution {
+  grid-area: b;
+}
+.startStop {
+  grid-area: c;
+}
+.step {
+  grid-area: d;
+}
+.seedRandomBoard {
+  grid-area: e;
+}
+.draw {
+  grid-area: f;
+}
+.clear {
+  grid-area: g;
+}
+.stroke {
+  grid-area: h;
+}
+
+.controlContainer {
+  margin: 1rem 20%;
+  display: grid;
+  grid-template-areas:
+    "a b b"
+    "c d e"
+    "f g h"
+    ;
+  grid-gap: 1rem;
+  justify-items: center;
+  align-items:center;
+}
+
+.flexContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+}

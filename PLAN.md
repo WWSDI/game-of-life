@@ -4,10 +4,13 @@
 - [ ] Step button: not functioning
 - [ ] Draw feature: it should behave as such that it fills dead cells and doesn't change live cells
 
+## Warnings
+- [ ] `<Board>` useEffect missing dependancies
+
 ## Features to add
 - [ ] Mobile-first responsive design
 - [ ] Host on Netlify
 - [ ] Erase feature
 - [ ] Stroke width feature
 - [ ] Clear board feature
-- [ ] Stamp feature with preset shapes
+- [ ] Stamp feature with preloaded shapes
