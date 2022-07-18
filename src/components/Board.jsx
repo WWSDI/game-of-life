@@ -26,12 +26,14 @@ export default function Board({
     setBoard(newBoard);
   };
 
-  const handleMouseEnter = (e) => {
+  const handleDraw = (e) => {
     const idx = e.target.attributes.idx.value;
 
     if (e.ctrlKey) {
+      if (board[idx]) return;
+
       const newBoard = [...board];
-      newBoard[idx] = !newBoard[idx];
+      newBoard[idx] = true;
       setBoard(newBoard);
     }
   };
@@ -51,21 +53,15 @@ export default function Board({
         console.log("<Board>: render next gen");
       }
     }, 1000 - speed);
-    
   }, [start, board]);
 
   return (
-    <div
-      className={styles.board}
-      id="board"
-      onClick={handleClick}
-      // onMouseEnter={handleMouseEnter}
-    >
+    <div className={styles.board} id="board" onClick={handleClick}>
       {board.map((v, i) => {
         return (
           <Cell
             key={i}
-            handleMouseEnter={handleMouseEnter}
+            handleDraw={handleDraw}
             value={v}
             idx={i}
             theme={theme}

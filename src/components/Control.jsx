@@ -171,9 +171,11 @@ export default function Control({
       <div id="draw" className={`${styles.draw} ${styles.container}`}>
         <Button>Draw (hold ctrl key)</Button>
       </div>
+
       <div id="clear" className={`${styles.clear} ${styles.container}`}>
         <Button handleClick={handleClear}>Clear</Button>
       </div>
+      
       <div id="stroke" className={`${styles.stroke} ${styles.container}`}>
         <Button>Stroke (hold alt key)</Button>
       </div>

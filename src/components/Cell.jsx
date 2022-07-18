@@ -66,10 +66,10 @@ const themes = {
   },
 };
 
-export default function Cell({ value, idx, handleMouseEnter, theme }) {
+export default function Cell({ value, idx, handleDraw, theme }) {
   return (
     <div
-      onMouseEnter={handleMouseEnter}
+      onMouseEnter={handleDraw}
       className={`${styles.cell}`}
       style={selectTheme(themes, theme, value)}
       value={value}
