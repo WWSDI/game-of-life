@@ -33,26 +33,39 @@ export default function Board({
   const handleDraw = (e) => {
     const idx = Number(e.target.attributes.idx.value);
     // normal stroke
-    if (e.ctrlKey) {
+    if (e.ctrlKey && !e.metaKey) {
       if (board[idx]) return;
 
       const newBoard = [...board];
       newBoard[idx] = true;
       setBoard(newBoard);
     }
+
     // wide stroke
     if (e.altKey) {
-      // if (board[idx]) return;
-
       const newBoard = [...board];
-      // newBoard[idx] = true;
+      newBoard[idx] = true;
+
       const neighbours = getValidNeighboursIndices(rows, idx, cols);
-      console.log(neighbours);
+      // console.log(neighbours);
       neighbours.forEach((n) => (newBoard[n] = true));
       setBoard(newBoard);
     }
-    // erase
-    // if(e.)
+
+    // erase with normal/wide stroke
+    if (e.metaKey) {
+      const newBoard = [...board];
+      newBoard[idx] = false;
+
+      // hold both ctrl and meta key to apply normal stroke erasing
+      if (!e.ctrlKey) {
+        const neighbours = getValidNeighboursIndices(rows, idx, cols);
+        // console.log(neighbours);
+        neighbours.forEach((n) => (newBoard[n] = false));
+      }
+
+      setBoard(newBoard);
+    }
   };
 
   // for stepping
