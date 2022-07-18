@@ -12,12 +12,15 @@ export const getNeighboursIndices = (idx, cols, proximity) => {
   const n6 = idx + cols - 1;
   const n7 = idx + cols;
   const n8 = idx + cols + 1;
+  // console.log([n1, n2, n3, n4, n5, n6, n7, n8]);
   return [n1, n2, n3, n4, n5, n6, n7, n8];
 };
 
 export const getValidNeighboursIndices = (rows, idx, cols, proximity = 1) => {
-  const neighbours = getNeighboursIndices(idx, cols, proximity);
-  const validNeighbours = neighbours.map((n) => n >= 0 && n < cols * rows);
+  const neighboursIndices = getNeighboursIndices(idx, cols, proximity);
+  const validNeighbours = neighboursIndices.filter(
+    (n) => n >= 0 && n < cols * rows
+  );
   return validNeighbours;
 };
 

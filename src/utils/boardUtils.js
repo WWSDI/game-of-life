@@ -1,5 +1,3 @@
-import { getNeighboursIndices, getValidNeighboursIndices } from "./cellUtils";
-
 export const getInit = (cols, rows) => {
   const bd = Array(cols * rows).fill(false);
   bd[156] = true;

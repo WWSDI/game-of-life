@@ -1,7 +1,12 @@
 import { useEffect, useRef } from "react";
 import Cell from "./Cell";
 import styles from "./board.module.css";
-import { getNumofLiveNeighbours, getNextGen } from "../utils/cellUtils";
+import {
+  getNumofLiveNeighbours,
+  getNextGen,
+  getNeighboursIndices,
+  getValidNeighboursIndices,
+} from "../utils/cellUtils";
 
 export default function Board({
   board,
@@ -16,28 +21,40 @@ export default function Board({
   step,
   setStep,
 }) {
-  
   const handleClick = (e) => {
     const { value: idx } = e.target.attributes.idx;
-    
+
     const newValue = !board[idx];
     const newBoard = [...board];
     newBoard[idx] = newValue;
     setBoard(newBoard);
   };
-  
+
   const handleDraw = (e) => {
-    const idx = e.target.attributes.idx.value;
-    
+    const idx = Number(e.target.attributes.idx.value);
+    // normal stroke
     if (e.ctrlKey) {
       if (board[idx]) return;
-      
+
       const newBoard = [...board];
       newBoard[idx] = true;
       setBoard(newBoard);
     }
+    // wide stroke
+    if (e.altKey) {
+      // if (board[idx]) return;
+
+      const newBoard = [...board];
+      // newBoard[idx] = true;
+      const neighbours = getValidNeighboursIndices(rows, idx, cols);
+      console.log(neighbours);
+      neighbours.forEach((n) => (newBoard[n] = true));
+      setBoard(newBoard);
+    }
+    // erase
+    // if(e.)
   };
-  
+
   // for stepping
   //感覺這裡好像很適合寫成custom hook，可以試試看
   // useRef() is used for saving remaining render count between renders, so that this useEffect hook doesn't over render (it renders twice due to update delay of step state)
@@ -79,7 +96,7 @@ export default function Board({
       }
     }, 1000 - speed);
 
-    return () => clearTimeout(id)
+    return () => clearTimeout(id);
   }, [start, board]);
 
   return (
