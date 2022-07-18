@@ -12,6 +12,7 @@ function App() {
   // const [rows, setRows] = useState(40);
   const [[cols,rows], setColsRows] = useState([40,40]);
   const [start, setStart] = useState(false);
+  const [step, setStep] = useState(false);
   const [seed, setSeed] = useState(800);
   const [speed, setSpeed] = useState(700);
   // a possible way to improve performance is to use object intead of boolean for cell value
@@ -43,7 +44,9 @@ function App() {
         setGeneration={setGeneration}
         seed={seed}
         theme={theme}
-      />
+        step={step}
+        setStep={setStep}
+        />
       <Control
         cols={cols}
         setColsRows={setColsRows}
@@ -60,7 +63,8 @@ function App() {
         setBoard={setBoard}
         theme={theme}
         setTheme={setTheme}
-      />
+        setStep={setStep}
+        />
     </div>
   );
 }

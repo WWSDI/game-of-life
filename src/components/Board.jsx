@@ -13,6 +13,8 @@ export default function Board({
   speed,
   setGeneration,
   theme,
+  step,
+  setStep,
 }) {
   const savedInterval = useRef();
   // console.log("❤️", savedInterval);
@@ -38,6 +40,23 @@ export default function Board({
     }
   };
 
+  // for stepping
+  useEffect(() => {
+    console.log("<Board>: step");
+    if (!step) return;
+
+    const newBoard = board.map((alive, i) =>
+      getNextGen(alive, getNumofLiveNeighbours(i, cols, board))
+    );
+
+    setBoard(newBoard);
+    setGeneration((gen) => gen + 1);
+    console.log("<Board>: render next gen");
+
+    return () => setStep(false);
+  }, [step]);
+
+  // for normal start/stop
   useEffect(() => {
     console.log("<Board>: useEffect");
     if (!start) return;

@@ -1,9 +1,9 @@
 import styles from "./button.module.css";
 
-export default function Button({ handleClick, children }) {
+export default function Button({ handleClick, children, disabled }) {
   return (
-    <div className={`${styles.button}`} onClick={handleClick}>
+    <button className={`${styles.button}`} onClick={handleClick} disabled={disabled}>
       <span>{children}</span>
-    </div>
+    </button>
   );
 }
