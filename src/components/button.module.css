@@ -1,12 +1,20 @@
 .button {
   display: inline-block;
-  height: 2rem;
-  padding: 0.5rem;
-  border: 2px solid gray;
+  width: 8rem;
+  height: 3rem;
+
+  padding: 0.3rem;
+  /* border: 2px solid gray; */
   border-radius: 1rem;
   background-color: rgb(156, 236, 34);
   cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  /* margin: auto 0; */
+  align-items: center;
 }
+
 .button:hover {
   background-color: greenyellow;
 }

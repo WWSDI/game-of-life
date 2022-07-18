@@ -1,0 +1,36 @@
+.changeCorlorTheme {
+  grid-area: a;
+}
+.changeResolution {
+  grid-area: c;
+}
+.startStop {
+  grid-area: b;
+}
+.step {
+  grid-area: d;
+}
+.seedRandomBoard {
+  grid-area: e;
+}
+.draw {
+  grid-area: f;
+}
+
+.controlContainer {
+  margin: 1rem 20%;
+  display: grid;
+  grid-template-areas:
+    "a b b"
+    "c d e"
+    "f f f"
+    ;
+  grid-gap: 1rem;
+  justify-items: center;
+  align-items:center;
+}
+
+.flexContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+}

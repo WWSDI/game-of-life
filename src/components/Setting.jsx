@@ -1,7 +1,7 @@
 export default function Setting({generation}) {
   return (
     <div>
-      <h1>Generation: {generation}</h1>
+      <h2>Generation: {generation}</h2>
     </div>
   );
 }
