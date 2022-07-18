@@ -19,6 +19,7 @@ export default function Control({
   setGeneration,
   theme,
   setTheme,
+  step,
   setStep,
 }) {
   const changeTheme = (event) => {
@@ -152,8 +153,9 @@ export default function Control({
         id="step"
         className={`${styles.step} ${styles.container}`}
         onClick={() => {
-          console.log("<Control>: step button clicked");
-          setStep(true);
+          console.log("<Control>: step button clicked", step);
+          setStep(() => !step);
+          // setStep(true);
         }}
       >
         <Button disabled={start ? true : false}>Step</Button>
@@ -180,7 +182,7 @@ export default function Control({
         <Button>Draw (hold ctrl key)</Button>
       </div>
 
-      <div id="clear" className={`${styles.clear} ${styles.container}`}>
+      <div id="clearBoard" className={`${styles.clear} ${styles.container}`}>
         <Button handleClick={handleClear}>Clear</Button>
       </div>
 

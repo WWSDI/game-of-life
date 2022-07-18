@@ -63,6 +63,7 @@ function App() {
         setBoard={setBoard}
         theme={theme}
         setTheme={setTheme}
+        step={step}
         setStep={setStep}
         />
     </div>
