@@ -1,5 +1,5 @@
 import Button from "./Button";
-import { getInitRan } from "../utils/boardUtils";
+import { getInit, getInitRan } from "../utils/boardUtils";
 import styles from "./control.module.css";
 
 export default function Control({
@@ -162,7 +162,13 @@ export default function Control({
         <Button>Draw (hold ctrl key)</Button>
       </div>
       <div id="clear" className={`${styles.clear} ${styles.container}`}>
-        <Button>Clear</Button>
+        <Button
+          onClick={() => {
+            setBoard(getInit(cols, rows));
+          }}
+        >
+          Clear
+        </Button>
       </div>
       <div id="stroke" className={`${styles.stroke} ${styles.container}`}>
         <Button>Stroke (hold alt key)</Button>

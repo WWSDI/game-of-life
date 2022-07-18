@@ -9,6 +9,8 @@ export const getInit = (cols, rows) => {
   return bd;
 };
 
+export const getEmptyBd = (cols, rows) => Array(cols * rows).fill(false);
+
 export const randomiseBd = (bd, numofLiveCells, cols, rows) => {
   for (let index = 0; index < numofLiveCells; index++) {
     const j = Math.floor(Math.random() * cols * rows);
