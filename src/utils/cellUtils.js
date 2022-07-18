@@ -1,4 +1,4 @@
-export const getNumofLiveNeighbours = (idx, cols, board) => {
+export const getNeighboursIndices = (idx, cols, proximity) => {
   // neighbours 1-8
   //   n1 n2 n3
   //   n4 c  n5
@@ -12,8 +12,17 @@ export const getNumofLiveNeighbours = (idx, cols, board) => {
   const n6 = idx + cols - 1;
   const n7 = idx + cols;
   const n8 = idx + cols + 1;
+  return [n1, n2, n3, n4, n5, n6, n7, n8];
+};
 
-  const liveNeighbours = [n1, n2, n3, n4, n5, n6, n7, n8].filter(
+export const getValidNeighboursIndices = (rows, idx, cols, proximity = 1) => {
+  const neighbours = getNeighboursIndices(idx, cols, proximity);
+  const validNeighbours = neighbours.map((n) => n >= 0 && n < cols * rows);
+  return validNeighbours;
+};
+
+export const getNumofLiveNeighbours = (idx, cols, board) => {
+  const liveNeighbours = getNeighboursIndices(idx, cols).filter(
     (n) => board[n]
   );
 

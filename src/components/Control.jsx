@@ -1,5 +1,5 @@
 import Button from "./Button";
-import { getEmptyBd, getInit, getInitRan } from "../utils/boardUtils";
+import { getEmptyBd, getInit, getInitRan, getMagneticRandomBd } from "../utils/boardUtils";
 import styles from "./control.module.css";
 
 export default function Control({
@@ -34,6 +34,7 @@ export default function Control({
   const clickRandom = (seed) => {
     console.log("⭐️ about to use RANDOM BOARD");
     if (!start) {
+      console.log("⭐️");
       setBoard(getInitRan(cols, rows, seed));
       setGeneration(1);
       return;
