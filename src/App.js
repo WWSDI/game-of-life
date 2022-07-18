@@ -8,8 +8,9 @@ import { getInitRan } from "./utils/boardUtils";
 function App() {
   const [generation, setGeneration] = useState(1);
   // default cols * rows = 40 * 30
-  const [cols, setCols] = useState(40);
-  const [rows, setRows] = useState(40);
+  // const [cols, setCols] = useState(40);
+  // const [rows, setRows] = useState(40);
+  const [[cols,rows], setColsRows] = useState([40,40]);
   const [start, setStart] = useState(false);
   const [seed, setSeed] = useState(800);
   const [speed, setSpeed] = useState(700);
@@ -45,9 +46,9 @@ function App() {
       />
       <Control
         cols={cols}
-        setCols={setCols}
+        setColsRows={setColsRows}
         rows={rows}
-        setRows={setRows}
+        // setRows={setRows}
         speed={speed}
         setSpeed={setSpeed}
         seed={seed}

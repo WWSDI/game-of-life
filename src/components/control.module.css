@@ -2,10 +2,10 @@
   grid-area: a;
 }
 .changeResolution {
-  grid-area: c;
+  grid-area: b;
 }
 .startStop {
-  grid-area: b;
+  grid-area: c;
 }
 .step {
   grid-area: d;
@@ -16,6 +16,12 @@
 .draw {
   grid-area: f;
 }
+.clear {
+  grid-area: g;
+}
+.stroke {
+  grid-area: h;
+}
 
 .controlContainer {
   margin: 1rem 20%;
@@ -23,7 +29,7 @@
   grid-template-areas:
     "a b b"
     "c d e"
-    "f f f"
+    "f g h"
     ;
   grid-gap: 1rem;
   justify-items: center;
