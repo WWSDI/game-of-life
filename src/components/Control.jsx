@@ -126,7 +126,7 @@ export default function Control({
       </div>
 
       <div className={`${styles.startStop} ${styles.container}`}>
-        <Button handleClick={handleStartStop}>⏯</Button>
+        <Button handleClick={handleStartStop}>{start? "STOP":"START"}</Button>
         <div className="flexContainer ">
           <label>
             <input

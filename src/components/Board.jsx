@@ -71,13 +71,15 @@ export default function Board({
       getNextGen(alive, getNumofLiveNeighbours(i, cols, board))
     );
 
-    setTimeout(() => {
+    const id = setTimeout(() => {
       if (start) {
         setBoard(newBoard);
         setGeneration((gen) => gen + 1);
         console.log("<Board>: render next gen");
       }
     }, 1000 - speed);
+
+    return () => clearTimeout(id)
   }, [start, board]);
 
   return (

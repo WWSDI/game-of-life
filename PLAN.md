@@ -1,4 +1,4 @@
-# App Development Plan
+# App Development Plan & Progress
 ## Bugs
 - [x] Speed slider bug: when using slider to change speed, new value doesn't apply unless pause and restart
 - [x] Step button: not functioning
@@ -13,6 +13,7 @@
 - [ ] Erase feature
 - [ ] Stroke width feature
 - [x] Clear board feature
+- [ ] Toggle grid: toggle css cell board
 - [ ] Stamp feature with preloaded shapes
 
 ## Refactor
