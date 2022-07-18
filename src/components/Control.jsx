@@ -1,5 +1,5 @@
 import Button from "./Button";
-import { getInit, getInitRan } from "../utils/boardUtils";
+import { getEmptyBd, getInit, getInitRan } from "../utils/boardUtils";
 import styles from "./control.module.css";
 
 export default function Control({
@@ -56,6 +56,16 @@ export default function Control({
     setTimeout(() => {
       document.querySelector(":root").style.setProperty("--cols", cols);
       setBoard(getInitRan(cols, rows, seed));
+      setGeneration(1);
+    }, 200);
+  };
+
+  const handleClear = () => {
+    if (start) {
+      setStart(false);
+    }
+    setTimeout(() => {
+      setBoard(getEmptyBd(cols, rows));
       setGeneration(1);
     }, 200);
   };
@@ -162,13 +172,7 @@ export default function Control({
         <Button>Draw (hold ctrl key)</Button>
       </div>
       <div id="clear" className={`${styles.clear} ${styles.container}`}>
-        <Button
-          onClick={() => {
-            setBoard(getInit(cols, rows));
-          }}
-        >
-          Clear
-        </Button>
+        <Button handleClick={handleClear}>Clear</Button>
       </div>
       <div id="stroke" className={`${styles.stroke} ${styles.container}`}>
         <Button>Stroke (hold alt key)</Button>
