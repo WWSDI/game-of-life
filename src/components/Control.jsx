@@ -59,9 +59,6 @@ export default function Control({
   const changeRes = () => {
     if (start) {
       setStart(false);
-      alert(
-        "It's not safe to change resolution when the game is running, please wait for it to stop before clicking the button."
-      );
       return;
     }
     setTimeout(() => {
@@ -96,8 +93,6 @@ export default function Control({
         <select
           name="changeColorTheme"
           onChange={changeTheme}
-          // value={theme}
-          // defaultValue="vividRainbow"
         >
           <option selected disabled>
             Color Theme
@@ -113,7 +108,10 @@ export default function Control({
         </select>
       </div>
 
-      <div className={`${styles.changeResolution} ${styles.container}`}>
+      <div className={`${styles.changeResolution} ${styles.container} ${styles.tooltip}`}>
+        <span class={styles.tooltiptext}>
+          Change resolution and shape of the board
+        </span>
         <select
           name="changeResolution"
           disabled={start ? true : false}
@@ -121,9 +119,6 @@ export default function Control({
             if (!e.target.value) return;
             if (start) {
               setStart(false);
-              alert(
-                "It's not safe to change resolution when the game is running, please wait for it to stop before clicking the button."
-              );
               return;
             }
 
@@ -132,21 +127,24 @@ export default function Control({
           }}
         >
           <option selected disabled>
-            Resolution
+            Choose a resolution
           </option>
-          <option value={[30, 30]}>Square (S, 30 * 30)</option>
-          <option value={[40, 40]}>Square (M, 40 * 40)</option>
-          <option value={[50, 50]}>Square (L, 50 * 50)</option>
-          <option value={[50, 30]}>Widescreen (S, 50 * 30)</option>
-          <option value={[60, 40]}>Widescreen (M, 60 * 40)</option>
-          <option value={[80, 40]}>Widescreen (L, 80 * 40)</option>
+          <option value={[30, 30]}>Square (S, 30*30)</option>
+          <option value={[40, 40]}>Square (M, 40*40)</option>
+          <option value={[50, 50]}>Square (L, 50*50)</option>
+          <option value={[50, 30]}>Widescreen (S, 50*30)</option>
+          <option value={[60, 40]}>Widescreen (M, 60*40)</option>
+          <option value={[80, 40]}>Widescreen (L, 80*40)</option>
         </select>
         <Button handleClick={changeRes} disabled={start ? true : false}>
           Change Resolution
         </Button>
       </div>
 
-      <div className={`${styles.startStop} ${styles.container}`}>
+      <div className={`${styles.startStop} ${styles.container} ${styles.tooltip}`}>
+        <span class={styles.tooltiptext}>
+        Play/Pause the game. Use the slider to change the speed.
+        </span>
         <Button handleClick={handleStartStop}>
           {start ? "STOP" : "START"}
         </Button>
@@ -174,20 +172,26 @@ export default function Control({
 
       <div
         id="step"
-        className={`${styles.step} ${styles.container}`}
+        className={`${styles.step} ${styles.container} ${styles.tooltip}`}
         onClick={() => {
           console.log("<Control>: step button clicked", step);
           setStep(() => !step);
           // setStep(true);
         }}
       >
+        <span class={styles.tooltiptext}>
+        Manually step into the next generation.
+        </span>
         <Button disabled={start ? true : false}>Step</Button>
       </div>
 
       <div
         id="seedRandomBoard"
-        className={`${styles.seedRandomBoard} ${styles.container}`}
+        className={`${styles.seedRandomBoard} ${styles.container} ${styles.tooltip}`}
       >
+        <span class={styles.tooltiptext}>
+        Randomise the board. Use Seed slide to control the number of live cells being seeded.
+        </span>
         <label>
           Seed Number
           <input
@@ -201,11 +205,19 @@ export default function Control({
         <Button handleClick={() => clickRandom(seed)}>Random</Button>
       </div>
 
-      <div id="draw" className={`${styles.draw} ${styles.container}`}>
+      <div id="draw" className={`${styles.draw} ${styles.container} ${styles.tooltip}`}>
+        <div class={styles.tooltiptext}>
+        Enable drawing mode. Can be used both when the game is running or paused.
+        
+        When on: hold <em>Alt</em> key to draw with widestroke, <em>Ctrl</em> for thinstroke; 
+        </div>
         <Button handleClick={toggleDraw}>Draw</Button>
       </div>
 
-      <div id="clearBoard" className={`${styles.clear} ${styles.container}`}>
+      <div id="clearBoard" className={`${styles.clear} ${styles.container} ${styles.tooltip}`}>
+        <span class={styles.tooltiptext}>
+        Clear the whole board. Use if you want a blank canvas for Drawing.
+        </span>
         <Button handleClick={handleClear}>Clear</Button>
       </div>
     </div>
