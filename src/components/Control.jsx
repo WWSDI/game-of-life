@@ -111,6 +111,7 @@ export default function Control({
       <div className={`${styles.changeResolution} ${styles.container}`}>
         <select
           name="changeResolution"
+          disabled={start ? true : false}
           onChange={(e) => {
             if (!e.target.value) return;
             if (start) {
@@ -135,7 +136,9 @@ export default function Control({
           <option value={[60, 40]}>Widescreen (M, 60 * 40)</option>
           <option value={[80, 40]}>Widescreen (L, 80 * 40)</option>
         </select>
-        <Button handleClick={changeRes}>Change Resolution</Button>
+        <Button handleClick={changeRes} disabled={start ? true : false}>
+          Change Resolution
+        </Button>
       </div>
 
       <div className={`${styles.startStop} ${styles.container}`}>
