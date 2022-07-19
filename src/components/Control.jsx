@@ -87,7 +87,12 @@ export default function Control({
 
   return (
     <div className={styles.controlContainer}>
-      <div className={`${styles.changeColorTheme} ${styles.container}`}>
+      <div
+        className={`${styles.changeColorTheme} ${styles.container} ${styles.tooltip}`}
+      >
+        <span class={styles.tooltiptext}>
+          Change colour theme of the board
+        </span>
         <select
           name="changeColorTheme"
           onChange={changeTheme}
