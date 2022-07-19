@@ -20,6 +20,8 @@ export default function Board({
   theme,
   step,
   setStep,
+  draw,
+  setDraw,
 }) {
   const handleClick = (e) => {
     const { value: idx } = e.target.attributes.idx;
@@ -31,9 +33,11 @@ export default function Board({
   };
 
   const handleDraw = (e) => {
+    console.log(draw);
+
     const idx = Number(e.target.attributes.idx.value);
     // normal stroke
-    if (e.ctrlKey && !e.metaKey) {
+    if (draw && e.ctrlKey && !e.metaKey) {
       if (board[idx]) return;
 
       const newBoard = [...board];
@@ -42,7 +46,7 @@ export default function Board({
     }
 
     // wide stroke
-    if (e.altKey) {
+    if (draw && e.altKey) {
       const newBoard = [...board];
       newBoard[idx] = true;
 
@@ -53,7 +57,7 @@ export default function Board({
     }
 
     // erase with normal/wide stroke
-    if (e.metaKey) {
+    if (draw && e.metaKey) {
       const newBoard = [...board];
       newBoard[idx] = false;
 

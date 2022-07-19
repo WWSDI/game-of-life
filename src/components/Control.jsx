@@ -1,6 +1,12 @@
 import Button from "./Button";
-import { getEmptyBd, getInit, getInitRan, getMagneticRandomBd } from "../utils/boardUtils";
+import {
+  getEmptyBd,
+  getInit,
+  getInitRan,
+  getMagneticRandomBd,
+} from "../utils/boardUtils";
 import styles from "./control.module.css";
+import stylesBtn from "./button.module.css";
 
 export default function Control({
   cols,
@@ -21,6 +27,8 @@ export default function Control({
   setTheme,
   step,
   setStep,
+  draw,
+  setDraw,
 }) {
   const changeTheme = (event) => {
     setTheme(event.target.value);
@@ -71,6 +79,10 @@ export default function Control({
       setBoard(getEmptyBd(cols, rows));
       setGeneration(1);
     }, 200);
+  };
+  const toggleDraw = (e) => {
+    e.currentTarget.classList.toggle(stylesBtn.buttonActivated);
+    setDraw(!draw);
   };
 
   return (
@@ -127,7 +139,9 @@ export default function Control({
       </div>
 
       <div className={`${styles.startStop} ${styles.container}`}>
-        <Button handleClick={handleStartStop}>{start? "STOP":"START"}</Button>
+        <Button handleClick={handleStartStop}>
+          {start ? "STOP" : "START"}
+        </Button>
         <div className="flexContainer ">
           <label>
             <input
@@ -180,15 +194,11 @@ export default function Control({
       </div>
 
       <div id="draw" className={`${styles.draw} ${styles.container}`}>
-        <Button>Draw (hold ctrl key)</Button>
+        <Button handleClick={toggleDraw}>Draw</Button>
       </div>
 
       <div id="clearBoard" className={`${styles.clear} ${styles.container}`}>
         <Button handleClick={handleClear}>Clear</Button>
-      </div>
-
-      <div id="stroke" className={`${styles.stroke} ${styles.container}`}>
-        <Button>Stroke (hold alt key)</Button>
       </div>
     </div>
   );

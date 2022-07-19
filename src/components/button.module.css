@@ -25,3 +25,8 @@
   /* prevents button from showing hover and active css effect (e.g. being highlighted) */
   pointer-events: none;
 }
+
+.buttonActivated {
+  background-color: pink;
+  font-size: large;
+}

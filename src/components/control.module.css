@@ -1,35 +1,39 @@
 .changeCorlorTheme {
-  grid-area: a;
+  grid-area: theme;
 }
 .changeResolution {
-  grid-area: b;
+  grid-area: res;
 }
 .startStop {
-  grid-area: c;
+  grid-area: start;
 }
 .step {
-  grid-area: d;
+  grid-area: step;
 }
 .seedRandomBoard {
-  grid-area: e;
+  grid-area: ran;
 }
 .draw {
-  grid-area: f;
+  grid-area: draw;
 }
 .clear {
-  grid-area: g;
+  grid-area: clear;
 }
-.stroke {
+/* .stroke {
   grid-area: h;
 }
+.erase {
+  grid-area: i;
+} */
 
 .controlContainer {
   margin: 1rem 20%;
   display: grid;
   grid-template-areas:
-    "a b b"
-    "c d e"
-    "f g h"
+    "start step ran"
+    "clear draw draw"
+    "theme res res"
+    /* "i i i" */
     ;
   grid-gap: 1rem;
   justify-items: center;
@@ -40,3 +44,4 @@
   display: grid;
   grid-template-columns: 1fr;
 }
+
