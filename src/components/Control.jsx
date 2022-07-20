@@ -73,6 +73,7 @@ export default function Control({
       return;
     }
     setTimeout(() => {
+      console.log("🥵 inside changeRes: cols, rows", cols, rows)
       document.querySelector(":root").style.setProperty("--cols", cols);
       setBoard(getEmptyBd(cols, rows));
       setGeneration(1);
@@ -87,7 +88,7 @@ export default function Control({
       setBoard(getEmptyBd(cols, rows));
       setGeneration(1);
       setMessageBoard("");
-    }, 200);
+    }, 400);
   };
   const toggleDraw = (e) => {
     e.currentTarget.classList.toggle(stylesBtn.buttonActivated);
@@ -112,13 +113,16 @@ export default function Control({
   };
 
   const demo = () => {
-    let [cols, rows] = [80, 40];
-    setColsRows([cols, rows]);
-    changeRes(cols, rows);
-    setSpeed(1000);
+    const setTheStage = (cols = 80, rows = 40) => {
+      changeRes(cols, rows);
+      setColsRows([cols, rows]);
+      setSpeed(1000);
+    };
+    // let [cols, rows] = [80, 50];
 
-    // Shape 1
-    (async () => {
+    const dcBlingBling = async (cols = 80, rows = 40) => {
+      setTheStage();
+
       setMessageBoard("Demo is about to start");
       await awaitTimeout(2000);
       const shape = getVerticalStripe(cols, rows, 3);
@@ -134,49 +138,55 @@ export default function Control({
       setMessageBoard("I call this one DC bling bling! 😊");
       await awaitTimeout(9000);
       setMessageBoard("Demo is over, you can start another one.");
-    })();
+    };
+    const doubleStrip = async (cols = 80, rows = 40) => {
+      setTheStage();
 
-    // Shape 2
-    // (async () => {
-    //   await awaitTimeout(2000);
-    //   const shape = get2VerticalStripes(cols, rows, 3);
-    //   console.log(shape);
-    //   setBoard(shape);
+      await awaitTimeout(2000);
+      const shape = get2VerticalStripes(cols, rows, 3);
+      console.log(shape);
+      setBoard(shape);
 
-    //   await awaitTimeout(2000);
-    //   setStart(true);
+      await awaitTimeout(2000);
+      setStart(true);
 
-    //   await awaitTimeout(30000);
-    //   alert("demo is over, you can start another one");
-    // })();
+      await awaitTimeout(30000);
+      alert("demo is over, you can start another one");
+    };
+    const starryNight = async (cols = 80, rows = 40) => {
+      setTheStage();
 
-    // Shape 3
-    // (async () => {
-    //   await awaitTimeout(2000);
-    //   const shape = getCross(cols, rows, 5);
-    //   console.log(shape);
-    //   setBoard(shape);
+      await awaitTimeout(2000);
+      const shape = getCross(cols, rows, 5);
+      console.log(shape);
+      setBoard(shape);
 
-    //   await awaitTimeout(2000);
-    //   setStart(true);
+      await awaitTimeout(2000);
+      setStart(true);
 
-    //   await awaitTimeout(30000);
-    //   alert("demo is over, you can start another one");
-    // })();
+      await awaitTimeout(30000);
+      alert("demo is over, you can start another one");
+    };
+    const snowFlake = async (cols=80, rows=50) => {
+      setTheStage(cols, rows);
 
-    // Shape 4
-    // (async () => {
-    //   await awaitTimeout(2000);
-    //   const shape = getSquare(cols, rows, 16);
-    //   console.log(shape);
-    //   setBoard(shape);
+      await awaitTimeout(2000);
+      const shape = getSquare(cols, rows, 16);
+      console.log(shape);
+      setBoard(shape);
 
-    //   await awaitTimeout(2000);
-    //   setStart(true);
+      await awaitTimeout(2000);
+      setStart(true);
 
-    //   await awaitTimeout(30000);
-    //   alert("demo is over, you can start another one");
-    // })();
+      await awaitTimeout(30000);
+      alert("demo is over, you can start another one");
+    };
+
+    // starryNight();
+    // snowFlake()
+    // doubleStrip();
+    dcBlingBling();
+
   };
 
   return (
