@@ -83,7 +83,7 @@ export default function Control({
   };
   const toggleTooltip = (e) => {
     setTooltip((tooltip) => !tooltip);
-    // due to useState is async and lagging, a temp state has to be created (it's a hack) 
+    // due to useState is async and lagging, a temp state has to be created (it's a hack)
     const tooltipState = !tooltip;
 
     // toggle button activated state
@@ -93,7 +93,7 @@ export default function Control({
     const allTooltiptext = document.querySelectorAll(
       `#control > div .${styles.tooltiptext}`
     );
-    const state = tooltipState ? "running" : "paused"
+    const state = tooltipState ? "running" : "paused";
     allTooltiptext.forEach((el) => {
       el.style.animationPlayState = state;
     });
@@ -227,9 +227,69 @@ export default function Control({
         className={`${styles.draw} ${styles.container} ${styles.tooltip}`}
       >
         <div className={styles.tooltiptext}>
-          Enable drawing mode. Can be used both when the game is running or
-          paused. When on: hold <em>Alt</em> key to draw with widestroke,{" "}
-          <em>Ctrl</em> for thinstroke;
+          <p>
+            Toggle drawing mode. Can be used both when the game is running or
+            paused.
+          </p>
+          <p>---------------------------</p>
+          <p>When in drawing mode: </p>
+          {((isMac) => {
+            const keys = isMac
+              ? ["⌃ Control", "⌘ Command", "⌥ Option"]
+              : ["Ctrl", "Alt", "Win/Meta"];
+            return (
+              <ul style={{ textAlign: "left" }}>
+                <li>
+                  <p>
+                    <strong>Draw</strong>: hold{" "}
+                    <span style={{ fontWeight: "bold", color: "greenyellow" }}>
+                      {keys[0]}
+                    </span>{" "}
+                    key to draw
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <strong>Erase</strong>: hold{" "}
+                    <span style={{ fontWeight: "bold", color: "greenyellow" }}>
+                      {keys[1]}
+                    </span>{" "}
+                    key
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <strong>Apply Thinstroke</strong>: hold ALSO{" "}
+                    <span style={{ fontWeight: "bold", color: "greenyellow" }}>
+                      {keys[2]}
+                    </span>{" "}
+                    key
+                  </p>
+                </li>
+              </ul>
+            );
+          })(window.navigator.platform.includes("Mac"))}
+
+          {/* {window.navigator.platform.includes("Mac") ? (
+            <ul style={{ textAlign: "left" }}>
+              <li>
+                <p>
+                  Hold <em>Control</em> key to draw
+                </p>
+              </li>
+              <li>
+                <p>
+                  Hold <em>Command</em> key to erase
+                </p>
+              </li>
+              <li>
+                <p>
+                  Hold ALSO <em>Option</em> key to apply thinstroke while
+                  drawing/erasing
+                </p>
+              </li>
+            </ul>
+          ) : undefined} */}
         </div>
         <Button handleClick={toggleDraw}>Draw</Button>
       </div>
