@@ -7,6 +7,12 @@ import {
 } from "../utils/boardUtils";
 import styles from "./control.module.css";
 import stylesBtn from "./button.module.css";
+import { awaitTimeout } from "../utils/appUtil";
+import {
+  get2VerticalStripes,
+  getHorizontalStripe,
+  getVerticalStripe,
+} from "../utils/shapeUtil";
 
 export default function Control({
   cols,
@@ -56,14 +62,14 @@ export default function Control({
     }, 200);
   };
 
-  const changeRes = () => {
+  const changeRes = (cols, rows, seed = 0) => {
     if (start) {
       setStart(false);
       return;
     }
     setTimeout(() => {
       document.querySelector(":root").style.setProperty("--cols", cols);
-      setBoard(getInitRan(cols, rows, seed));
+      setBoard(getEmptyBd(cols, rows));
       setGeneration(1);
     }, 200);
   };
@@ -75,7 +81,7 @@ export default function Control({
     setTimeout(() => {
       setBoard(getEmptyBd(cols, rows));
       setGeneration(1);
-    }, 200);
+    }, 500);
   };
   const toggleDraw = (e) => {
     e.currentTarget.classList.toggle(stylesBtn.buttonActivated);
@@ -100,23 +106,40 @@ export default function Control({
   };
 
   const demo = () => {
-    handleClear();
+    let [cols, rows] = [80, 40];
+    setColsRows([cols, rows]);
+    changeRes(cols, rows);
+    setSpeed(1000);
 
-    setTimeout(() => {
-      const verticalStripe = Array.from({ length: cols * rows }, (v, i) => {
-        if (
-          i % cols >= Math.floor(cols / 2) - 1 &&
-          i % cols <= Math.floor(cols / 2) + 1
-        )
-          return true;
-        else return false;
-      });
-      console.log(verticalStripe);
-      setBoard(verticalStripe);
-      setTimeout(()=>{
-        setStart(true)
-      },2000)
-    }, 1000);
+    alert("demo is about to start");
+
+    // Shape 1
+    // (async () => {
+    //   await awaitTimeout(2000);
+    //   const shape = getVerticalStripe( cols, rows, 3);
+    //   console.log(shape);
+    //   setBoard(shape);
+
+    //   await awaitTimeout(2000);
+    //   setStart(true);
+
+    //   await awaitTimeout(20000);
+    //   alert("demo is over, you can start another one");
+    // })();
+
+    // Shape 2
+    (async () => {
+      await awaitTimeout(2000);
+      const shape = get2VerticalStripes(cols, rows, 3);
+      console.log(shape);
+      setBoard(shape);
+
+      await awaitTimeout(2000);
+      setStart(true);
+
+      await awaitTimeout(30000);
+      alert("demo is over, you can start another one");
+    })();
   };
 
   return (
@@ -170,7 +193,10 @@ export default function Control({
           <option value={[60, 40]}>Widescreen (M, 60*40)</option>
           <option value={[80, 40]}>Widescreen (L, 80*40)</option>
         </select>
-        <Button handleClick={changeRes} disabled={start ? true : false}>
+        <Button
+          handleClick={() => changeRes(cols, rows)}
+          disabled={start ? true : false}
+        >
           Change Resolution
         </Button>
       </div>
