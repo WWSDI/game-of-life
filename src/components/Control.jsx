@@ -108,11 +108,14 @@ export default function Control({
           i % cols >= Math.floor(cols / 2) - 1 &&
           i % cols <= Math.floor(cols / 2) + 1
         )
-          return { alive: true };
-        else return { alive: false };
+          return true;
+        else return false;
       });
-      console.log(verticalStripe)
+      console.log(verticalStripe);
       setBoard(verticalStripe);
+      setTimeout(()=>{
+        setStart(true)
+      },2000)
     }, 1000);
   };
 
