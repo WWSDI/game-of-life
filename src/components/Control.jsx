@@ -38,6 +38,8 @@ export default function Control({
   setDraw,
   setTooltip,
   tooltip,
+  messageBoard,
+  setMessageBoard,
 }) {
   const changeTheme = (event) => {
     setTheme(event.target.value);
@@ -84,7 +86,8 @@ export default function Control({
     setTimeout(() => {
       setBoard(getEmptyBd(cols, rows));
       setGeneration(1);
-    }, 500);
+      setMessageBoard("");
+    }, 200);
   };
   const toggleDraw = (e) => {
     e.currentTarget.classList.toggle(stylesBtn.buttonActivated);
@@ -114,21 +117,24 @@ export default function Control({
     changeRes(cols, rows);
     setSpeed(1000);
 
-    alert("demo is about to start");
-
     // Shape 1
-    // (async () => {
-    //   await awaitTimeout(2000);
-    //   const shape = getVerticalStripe( cols, rows, 3);
-    //   console.log(shape);
-    //   setBoard(shape);
+    (async () => {
+      setMessageBoard("Demo is about to start");
+      await awaitTimeout(2000);
+      const shape = getVerticalStripe(cols, rows, 3);
+      console.log(shape);
+      setMessageBoard("Ready?");
+      setBoard(shape);
 
-    //   await awaitTimeout(2000);
-    //   setStart(true);
+      await awaitTimeout(2000);
+      setMessageBoard("Go!");
+      setStart(true);
 
-    //   await awaitTimeout(20000);
-    //   alert("demo is over, you can start another one");
-    // })();
+      await awaitTimeout(11000);
+      setMessageBoard("I call this one DC bling bling! 😊");
+      await awaitTimeout(9000);
+      setMessageBoard("Demo is over, you can start another one.");
+    })();
 
     // Shape 2
     // (async () => {
@@ -159,18 +165,18 @@ export default function Control({
     // })();
 
     // Shape 4
-    (async () => {
-      await awaitTimeout(2000);
-      const shape = getSquare(cols, rows, 16);
-      console.log(shape);
-      setBoard(shape);
+    // (async () => {
+    //   await awaitTimeout(2000);
+    //   const shape = getSquare(cols, rows, 16);
+    //   console.log(shape);
+    //   setBoard(shape);
 
-      await awaitTimeout(2000);
-      setStart(true);
+    //   await awaitTimeout(2000);
+    //   setStart(true);
 
-      await awaitTimeout(30000);
-      alert("demo is over, you can start another one");
-    })();
+    //   await awaitTimeout(30000);
+    //   alert("demo is over, you can start another one");
+    // })();
   };
 
   return (

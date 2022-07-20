@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./App.css";
 import Board from "./components/Board";
 import Control from "./components/Control";
-import Setting from "./components/Setting";
+import Info from "./components/Info";
 import { getInitRan } from "./utils/boardUtils";
 
 function App() {
@@ -18,6 +18,8 @@ function App() {
   const [theme, setTheme] = useState("vividRainbow");
   const [tooltip, setTooltip] = useState(false);
 
+  const [messageBoard, setMessageBoard] = useState( 'Enjoy the show!')
+
   return (
     <div className="App">
       <header>
@@ -30,7 +32,7 @@ function App() {
         </h1>
         <h2>Shawn's Implementation</h2>
       </header>
-      <Setting generation={generation} />
+      <Info generation={generation} messageBoard={messageBoard} />
       <Board
         board={board}
         setBoard={setBoard}
@@ -70,6 +72,8 @@ function App() {
         setDraw={setDraw}
         tooltip={tooltip}
         setTooltip={setTooltip}
+        messageBoard={messageBoard}
+        setMessageBoard={setMessageBoard}
       />
     </div>
   );
