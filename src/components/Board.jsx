@@ -33,20 +33,10 @@ export default function Board({
   };
 
   const handleDraw = (e) => {
-    console.log(draw);
-
     const idx = Number(e.target.attributes.idx.value);
-    // normal stroke
-    if (draw && e.ctrlKey && !e.metaKey) {
-      if (board[idx]) return;
-
-      const newBoard = [...board];
-      newBoard[idx] = true;
-      setBoard(newBoard);
-    }
-
+    
     // wide stroke
-    if (draw && e.altKey) {
+    if (draw && e.ctrlKey) {
       const newBoard = [...board];
       newBoard[idx] = true;
 
@@ -56,13 +46,22 @@ export default function Board({
       setBoard(newBoard);
     }
 
+    // thin stroke
+    if (draw && e.altKey && !e.metaKey) {
+      if (board[idx]) return;
+
+      const newBoard = [...board];
+      newBoard[idx] = true;
+      setBoard(newBoard);
+    }
+
     // erase with normal/wide stroke
     if (draw && e.metaKey) {
       const newBoard = [...board];
       newBoard[idx] = false;
 
       // hold both ctrl and meta key to apply normal stroke erasing
-      if (!e.ctrlKey) {
+      if (!e.altKey) {
         const neighbours = getValidNeighboursIndices(rows, idx, cols);
         // console.log(neighbours);
         neighbours.forEach((n) => (newBoard[n] = false));
