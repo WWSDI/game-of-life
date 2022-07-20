@@ -10,9 +10,12 @@ import stylesBtn from "./button.module.css";
 import { awaitTimeout } from "../utils/appUtil";
 import {
   get2VerticalStripes,
+  getCross,
   getHorizontalStripe,
+  getSquare,
   getVerticalStripe,
-} from "../utils/shapeUtil";
+  newShape,
+} from "../utils/demoUtil";
 
 export default function Control({
   cols,
@@ -128,9 +131,37 @@ export default function Control({
     // })();
 
     // Shape 2
+    // (async () => {
+    //   await awaitTimeout(2000);
+    //   const shape = get2VerticalStripes(cols, rows, 3);
+    //   console.log(shape);
+    //   setBoard(shape);
+
+    //   await awaitTimeout(2000);
+    //   setStart(true);
+
+    //   await awaitTimeout(30000);
+    //   alert("demo is over, you can start another one");
+    // })();
+
+    // Shape 3
+    // (async () => {
+    //   await awaitTimeout(2000);
+    //   const shape = getCross(cols, rows, 5);
+    //   console.log(shape);
+    //   setBoard(shape);
+
+    //   await awaitTimeout(2000);
+    //   setStart(true);
+
+    //   await awaitTimeout(30000);
+    //   alert("demo is over, you can start another one");
+    // })();
+
+    // Shape 4
     (async () => {
       await awaitTimeout(2000);
-      const shape = get2VerticalStripes(cols, rows, 3);
+      const shape = getSquare(cols, rows, 16);
       console.log(shape);
       setBoard(shape);
 
