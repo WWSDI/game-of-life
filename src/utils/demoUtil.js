@@ -70,3 +70,11 @@ export const newShape = (cols, rows, stripWidth = 3) => {
     else return false;
   });
 };
+
+// Not Used
+export const get4Square = (cols, rows, stripWidth = 3) => {
+  const bd1 = getVerticalStripe(cols, rows, stripWidth);
+  const bd2 = getHorizontalStripe(cols, rows, stripWidth);
+
+  return bd1.map((cell, i) => (cell || bd2[i] ? false : true));
+};

@@ -11,18 +11,15 @@ import { awaitTimeout } from "../utils/appUtil";
 import {
   get2VerticalStripes,
   getCross,
-  getHorizontalStripe,
   getSquare,
   getVerticalStripe,
-  newShape,
 } from "../utils/demoUtil";
+import { useState } from "react";
 
 export default function Control({
   cols,
   rows,
   setColsRows,
-  // setCols,
-  // setRows,
   seed,
   setSeed,
   speed,
@@ -38,9 +35,10 @@ export default function Control({
   setDraw,
   setTooltip,
   tooltip,
-  messageBoard,
   setMessageBoard,
 }) {
+  const [demo, setDemo] = useState("title");
+
   const changeTheme = (event) => {
     setTheme(event.target.value);
   };
@@ -73,7 +71,7 @@ export default function Control({
       return;
     }
     setTimeout(() => {
-      console.log("🥵 inside changeRes: cols, rows", cols, rows)
+      console.log("🥵 inside changeRes: cols, rows", cols, rows);
       document.querySelector(":root").style.setProperty("--cols", cols);
       setBoard(getEmptyBd(cols, rows));
       setGeneration(1);
@@ -112,13 +110,31 @@ export default function Control({
     });
   };
 
-  const demo = () => {
+  const handleDemo = () => {
     const setTheStage = (cols = 80, rows = 40) => {
       changeRes(cols, rows);
       setColsRows([cols, rows]);
       setSpeed(1000);
     };
-    // let [cols, rows] = [80, 50];
+    const cleanup = async (waitTime) => {
+      await awaitTimeout(waitTime);
+      setMessageBoard("Demo is over, thank you for watching.");
+
+      await awaitTimeout(3000);
+      setMessageBoard("");
+    };
+
+    const title = async () => {
+      console.log("Demo - title");
+      setMessageBoard(
+        <div style={{ background: "yellow", color: "red" }}>
+          <p>⚠️ You have NOT selected a demo to play. </p>
+          <p>Please choose one from the dropdown list.</p>
+        </div>
+      );
+      await awaitTimeout(3000);
+      setMessageBoard("");
+    };
 
     const dcBlingBling = async (cols = 80, rows = 40) => {
       setTheStage();
@@ -126,7 +142,7 @@ export default function Control({
       setMessageBoard("Demo is about to start");
       await awaitTimeout(2000);
       const shape = getVerticalStripe(cols, rows, 3);
-      console.log(shape);
+      
       setMessageBoard("Ready?");
       setBoard(shape);
 
@@ -136,10 +152,10 @@ export default function Control({
 
       await awaitTimeout(11000);
       setMessageBoard("I call this one DC bling bling! 😊");
-      await awaitTimeout(9000);
-      setMessageBoard("Demo is over, you can start another one.");
+
+      cleanup(9000);
     };
-    const doubleStrip = async (cols = 80, rows = 40) => {
+    const doubleStripe = async (cols = 80, rows = 40) => {
       setTheStage();
 
       await awaitTimeout(2000);
@@ -150,8 +166,7 @@ export default function Control({
       await awaitTimeout(2000);
       setStart(true);
 
-      await awaitTimeout(30000);
-      alert("demo is over, you can start another one");
+      cleanup(30000)
     };
     const starryNight = async (cols = 80, rows = 40) => {
       setTheStage();
@@ -164,13 +179,13 @@ export default function Control({
       await awaitTimeout(2000);
       setStart(true);
 
-      await awaitTimeout(30000);
-      alert("demo is over, you can start another one");
+      cleanup(30000);
     };
-    const snowFlake = async (cols=80, rows=50) => {
+    const snowFlake = async (cols = 80, rows = 50) => {
       setTheStage(cols, rows);
 
       await awaitTimeout(2000);
+      setMessageBoard("Hmmn, this is gonna be a short one...");
       const shape = getSquare(cols, rows, 16);
       console.log(shape);
       setBoard(shape);
@@ -178,15 +193,21 @@ export default function Control({
       await awaitTimeout(2000);
       setStart(true);
 
-      await awaitTimeout(30000);
-      alert("demo is over, you can start another one");
+      await awaitTimeout(5000);
+      setMessageBoard("This reminds me a little bit of Frozen. What do you think?");
+
+      cleanup(5000);
     };
 
-    // starryNight();
-    // snowFlake()
-    // doubleStrip();
-    dcBlingBling();
+    const demos = {
+      title,
+      dcBlingBling,
+      snowFlake,
+      doubleStripe,
+      starryNight,
+    };
 
+    demos[demo]();
   };
 
   return (
@@ -194,10 +215,16 @@ export default function Control({
       <div
         className={`${styles.changeColorTheme} ${styles.container} ${styles.tooltip}`}
       >
-        <span class={styles.tooltiptext}>Change colour theme of the board</span>
-        <select name="changeColorTheme" onChange={changeTheme}>
-          <option selected disabled>
-            Color Theme
+        <span className={styles.tooltiptext}>
+          Change colour theme of the board
+        </span>
+        <select
+          name="changeColorTheme"
+          onChange={changeTheme}
+          defaultValue="title"
+        >
+          <option value="title" disabled>
+            Change Color Theme
           </option>
           <option value="dimRainbow">Dim Rainbow</option>
           <option value="vividRainbow">Vivid Rainbow</option>
@@ -213,7 +240,7 @@ export default function Control({
       <div
         className={`${styles.changeResolution} ${styles.container} ${styles.tooltip}`}
       >
-        <div class={styles.tooltiptext}>
+        <div className={styles.tooltiptext}>
           <p>Change resolution and shape of the board.</p>
         </div>
         <select
@@ -229,8 +256,9 @@ export default function Control({
             const [cols, rows] = e.target.value.match(/(\d{2})/g);
             setColsRows([+cols, +rows]);
           }}
+          defaultValue="title"
         >
-          <option selected disabled>
+          <option value="title" disabled>
             Choose a resolution
           </option>
           <option value={[30, 30]}>Square (S, 30*30)</option>
@@ -249,16 +277,22 @@ export default function Control({
       </div>
 
       <div className={`${styles.demo} ${styles.container} ${styles.tooltip}`}>
-        <div class={styles.tooltiptext}>
+        <div className={styles.tooltiptext}>
           <p>Watch automated demo.</p>
           <p>You can choose different demo to watch.</p>
           <p>Sit back and enjoy the mesmerising show!</p>
         </div>
-        <Button handleClick={demo}>Demo</Button>
+        <Button handleClick={() => handleDemo(demo)}>Demo</Button>
         <div className="flexContainer">
           <label>
-            <select>
-              <option value="">DC Bling Bling</option>
+            <select value={demo} onChange={(e) => setDemo(e.target.value)}>
+              <option value="title" disabled>
+                Choose a demo
+              </option>
+              <option value="dcBlingBling">DC Bling Bling</option>
+              <option value="starryNight">Starry Night</option>
+              <option value="snowFlake">Snow Flake</option>
+              <option value="doubleStripe">Double Stripe</option>
             </select>
           </label>
         </div>
@@ -267,7 +301,7 @@ export default function Control({
       <div
         className={`${styles.startStop} ${styles.container} ${styles.tooltip}`}
       >
-        <div class={styles.tooltiptext}>
+        <div className={styles.tooltiptext}>
           <p>Play/Pause the game.</p>
           <p>Use the slider to change the speed.</p>
         </div>
@@ -305,7 +339,7 @@ export default function Control({
           // setStep(true);
         }}
       >
-        <div class={styles.tooltiptext}>
+        <div className={styles.tooltiptext}>
           <p>Manually step into the next generation.</p>
           <p>
             It's like playing a movie frame by frame. You can change the board
@@ -319,7 +353,7 @@ export default function Control({
         id="seedRandomBoard"
         className={`${styles.seedRandomBoard} ${styles.container} ${styles.tooltip}`}
       >
-        <div class={styles.tooltiptext}>
+        <div className={styles.tooltiptext}>
           <p>Randomise the board.</p>
           <p>
             Use Seed slider to control the number of live cells being seeded
