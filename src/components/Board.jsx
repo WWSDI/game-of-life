@@ -96,7 +96,7 @@ export default function Board({
 
   // for normal start/stop
   useEffect(() => {
-    console.log("<Board>: useEffect");
+    console.log("<Board>: useEffect, start/stop");
 
     if (!start) return;
 
@@ -108,7 +108,7 @@ export default function Board({
       if (start) {
         setBoard(newBoard);
         setGeneration((gen) => gen + 1);
-        console.log("<Board>: render next gen");
+        console.log("<Board>: ⏯ render next gen");
       }
     }, 1000 - speed);
 

@@ -7,11 +7,11 @@ import { getInitRan } from "./utils/boardUtils";
 
 function App() {
   const [generation, setGeneration] = useState(1);
-  const [[cols, rows], setColsRows] = useState([40, 40]);
+  const [[cols, rows], setColsRows] = useState([60, 40]);
   const [start, setStart] = useState(false);
   const [step, setStep] = useState(false);
   const [seed, setSeed] = useState(800);
-  const [speed, setSpeed] = useState(700);
+  const [speed, setSpeed] = useState(1000);
   const [draw, setDraw] = useState(false);
   // a possible way to improve performance is to use object intead of boolean for cell value
   const [board, setBoard] = useState(getInitRan(cols, rows, seed));

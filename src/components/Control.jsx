@@ -99,6 +99,23 @@ export default function Control({
     });
   };
 
+  const demo = () => {
+    handleClear();
+
+    setTimeout(() => {
+      const verticalStripe = Array.from({ length: cols * rows }, (v, i) => {
+        if (
+          i % cols >= Math.floor(cols / 2) - 1 &&
+          i % cols <= Math.floor(cols / 2) + 1
+        )
+          return { alive: true };
+        else return { alive: false };
+      });
+      console.log(verticalStripe)
+      setBoard(verticalStripe);
+    }, 1000);
+  };
+
   return (
     <div id="control" className={styles.controlContainer}>
       <div
@@ -123,9 +140,9 @@ export default function Control({
       <div
         className={`${styles.changeResolution} ${styles.container} ${styles.tooltip}`}
       >
-        <span class={styles.tooltiptext}>
-          Change resolution and shape of the board
-        </span>
+        <div class={styles.tooltiptext}>
+          <p>Change resolution and shape of the board.</p>
+        </div>
         <select
           name="changeResolution"
           disabled={start ? true : false}
@@ -158,9 +175,10 @@ export default function Control({
       <div
         className={`${styles.startStop} ${styles.container} ${styles.tooltip}`}
       >
-        <span class={styles.tooltiptext}>
-          Play/Pause the game. Use the slider to change the speed.
-        </span>
+        <div class={styles.tooltiptext}>
+          <p>Play/Pause the game.</p>
+          <p>Use the slider to change the speed.</p>
+        </div>
         <Button handleClick={handleStartStop}>
           {start ? "STOP" : "START"}
         </Button>
@@ -195,9 +213,13 @@ export default function Control({
           // setStep(true);
         }}
       >
-        <span class={styles.tooltiptext}>
-          Manually step into the next generation.
-        </span>
+        <div class={styles.tooltiptext}>
+          <p>Manually step into the next generation.</p>
+          <p>
+            It's like playing a movie frame by frame. You can change the board
+            with the drawing feature before stepping into the next generation.
+          </p>
+        </div>
         <Button disabled={start ? true : false}>Step</Button>
       </div>
 
@@ -205,10 +227,13 @@ export default function Control({
         id="seedRandomBoard"
         className={`${styles.seedRandomBoard} ${styles.container} ${styles.tooltip}`}
       >
-        <span class={styles.tooltiptext}>
-          Randomise the board. Use Seed slide to control the number of live
-          cells being seeded.
-        </span>
+        <div class={styles.tooltiptext}>
+          <p>Randomise the board.</p>
+          <p>
+            Use Seed slider to control the number of live cells being seeded
+            into the board.
+          </p>
+        </div>
         <label>
           Seed Number
           <input
@@ -219,7 +244,8 @@ export default function Control({
             value={seed}
           />
         </label>
-        <Button handleClick={() => clickRandom(seed)}>Random</Button>
+        {/* <Button handleClick={() => clickRandom(seed)}>Random</Button> */}
+        <Button handleClick={demo}>Random</Button>
       </div>
 
       <div
@@ -269,27 +295,6 @@ export default function Control({
               </ul>
             );
           })(window.navigator.platform.includes("Mac"))}
-
-          {/* {window.navigator.platform.includes("Mac") ? (
-            <ul style={{ textAlign: "left" }}>
-              <li>
-                <p>
-                  Hold <em>Control</em> key to draw
-                </p>
-              </li>
-              <li>
-                <p>
-                  Hold <em>Command</em> key to erase
-                </p>
-              </li>
-              <li>
-                <p>
-                  Hold ALSO <em>Option</em> key to apply thinstroke while
-                  drawing/erasing
-                </p>
-              </li>
-            </ul>
-          ) : undefined} */}
         </div>
         <Button handleClick={toggleDraw}>Draw</Button>
       </div>
@@ -298,9 +303,10 @@ export default function Control({
         id="clearBoard"
         className={`${styles.clear} ${styles.container} ${styles.tooltip}`}
       >
-        <span className={styles.tooltiptext}>
-          Clear the whole board. Use if you want a blank canvas for Drawing.
-        </span>
+        <div className={styles.tooltiptext}>
+          <p>Clear the whole board.</p>
+          <p>Use when you want a blank canvas for Drawing.</p>
+        </div>
         <Button handleClick={handleClear}>Clear</Button>
       </div>
 

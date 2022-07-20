@@ -1,7 +1,7 @@
 /* These variables are of global scope */
 :root {
   --cellWidth: 0.5rem;
-  --cols: 40;
+  --cols: 60;
 }
 
 header {
