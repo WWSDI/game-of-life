@@ -238,6 +238,22 @@ export default function Control({
         </Button>
       </div>
 
+      <div className={`${styles.demo} ${styles.container} ${styles.tooltip}`}>
+        <div class={styles.tooltiptext}>
+          <p>Watch automated demo.</p>
+          <p>You can choose different demo to watch.</p>
+          <p>Sit back and enjoy the mesmerising show!</p>
+        </div>
+        <Button handleClick={demo}>Demo</Button>
+        <div className="flexContainer">
+          <label>
+            <select>
+              <option value="">DC Bling Bling</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
       <div
         className={`${styles.startStop} ${styles.container} ${styles.tooltip}`}
       >
@@ -310,8 +326,7 @@ export default function Control({
             value={seed}
           />
         </label>
-        {/* <Button handleClick={() => clickRandom(seed)}>Random</Button> */}
-        <Button handleClick={demo}>Random</Button>
+        <Button handleClick={() => clickRandom(seed)}>Random</Button>
       </div>
 
       <div
