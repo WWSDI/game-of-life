@@ -1,6 +1,6 @@
 export default function Info({ generation, messageBoard }) {
   return (
-    <div>
+    <div id="info">
       <h2 style={{ fontSize: "medium" }}>
         <span>Generation:</span>
         <span>{generation}</span>

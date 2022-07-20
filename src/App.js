@@ -3,6 +3,7 @@ import "./App.css";
 import Board from "./components/Board";
 import Control from "./components/Control";
 import Info from "./components/Info";
+import Header from "./components/Header";
 import { getInitRan } from "./utils/boardUtils";
 
 function App() {
@@ -18,21 +19,11 @@ function App() {
   const [theme, setTheme] = useState("vividRainbow");
   const [tooltip, setTooltip] = useState(false);
 
-  const [messageBoard, setMessageBoard] = useState( 'Enjoy the show!')
+  const [messageBoard, setMessageBoard] = useState("Enjoy the show!");
 
   return (
     <div className="App">
-      <header>
-        <h1>
-          <span>
-            <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">
-              Game of Life
-            </a>
-          </span>
-        </h1>
-        <h2>Shawn's Implementation</h2>
-      </header>
-      <Info generation={generation} messageBoard={messageBoard} />
+      <Header generation={generation} messageBoard={messageBoard}/>
       <Board
         board={board}
         setBoard={setBoard}
