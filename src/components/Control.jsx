@@ -23,12 +23,12 @@ export default function Control({
   setBoard,
   generation,
   setGeneration,
-  theme,
   setTheme,
   step,
   setStep,
-  draw,
   setDraw,
+  setTooltip,
+  tooltip,
 }) {
   const changeTheme = (event) => {
     setTheme(event.target.value);
@@ -79,21 +79,33 @@ export default function Control({
   };
   const toggleDraw = (e) => {
     e.currentTarget.classList.toggle(stylesBtn.buttonActivated);
-    setDraw(!draw);
+    setDraw((draw) => !draw);
+  };
+  const toggleTooltip = (e) => {
+    setTooltip((tooltip) => !tooltip);
+    // due to useState is async and lagging, a temp state has to be created (it's a hack) 
+    const tooltipState = !tooltip;
+
+    // toggle button activated state
+    e.currentTarget.classList.toggle(stylesBtn.buttonActivated);
+
+    // toggle animation state
+    const allTooltiptext = document.querySelectorAll(
+      `#control > div .${styles.tooltiptext}`
+    );
+    const state = tooltipState ? "running" : "paused"
+    allTooltiptext.forEach((el) => {
+      el.style.animationPlayState = state;
+    });
   };
 
   return (
-    <div className={styles.controlContainer}>
+    <div id="control" className={styles.controlContainer}>
       <div
         className={`${styles.changeColorTheme} ${styles.container} ${styles.tooltip}`}
       >
-        <span class={styles.tooltiptext}>
-          Change colour theme of the board
-        </span>
-        <select
-          name="changeColorTheme"
-          onChange={changeTheme}
-        >
+        <span class={styles.tooltiptext}>Change colour theme of the board</span>
+        <select name="changeColorTheme" onChange={changeTheme}>
           <option selected disabled>
             Color Theme
           </option>
@@ -108,7 +120,9 @@ export default function Control({
         </select>
       </div>
 
-      <div className={`${styles.changeResolution} ${styles.container} ${styles.tooltip}`}>
+      <div
+        className={`${styles.changeResolution} ${styles.container} ${styles.tooltip}`}
+      >
         <span class={styles.tooltiptext}>
           Change resolution and shape of the board
         </span>
@@ -141,9 +155,11 @@ export default function Control({
         </Button>
       </div>
 
-      <div className={`${styles.startStop} ${styles.container} ${styles.tooltip}`}>
+      <div
+        className={`${styles.startStop} ${styles.container} ${styles.tooltip}`}
+      >
         <span class={styles.tooltiptext}>
-        Play/Pause the game. Use the slider to change the speed.
+          Play/Pause the game. Use the slider to change the speed.
         </span>
         <Button handleClick={handleStartStop}>
           {start ? "STOP" : "START"}
@@ -180,7 +196,7 @@ export default function Control({
         }}
       >
         <span class={styles.tooltiptext}>
-        Manually step into the next generation.
+          Manually step into the next generation.
         </span>
         <Button disabled={start ? true : false}>Step</Button>
       </div>
@@ -190,7 +206,8 @@ export default function Control({
         className={`${styles.seedRandomBoard} ${styles.container} ${styles.tooltip}`}
       >
         <span class={styles.tooltiptext}>
-        Randomise the board. Use Seed slide to control the number of live cells being seeded.
+          Randomise the board. Use Seed slide to control the number of live
+          cells being seeded.
         </span>
         <label>
           Seed Number
@@ -205,20 +222,37 @@ export default function Control({
         <Button handleClick={() => clickRandom(seed)}>Random</Button>
       </div>
 
-      <div id="draw" className={`${styles.draw} ${styles.container} ${styles.tooltip}`}>
-        <div class={styles.tooltiptext}>
-        Enable drawing mode. Can be used both when the game is running or paused.
-        
-        When on: hold <em>Alt</em> key to draw with widestroke, <em>Ctrl</em> for thinstroke; 
+      <div
+        id="draw"
+        className={`${styles.draw} ${styles.container} ${styles.tooltip}`}
+      >
+        <div className={styles.tooltiptext}>
+          Enable drawing mode. Can be used both when the game is running or
+          paused. When on: hold <em>Alt</em> key to draw with widestroke,{" "}
+          <em>Ctrl</em> for thinstroke;
         </div>
         <Button handleClick={toggleDraw}>Draw</Button>
       </div>
 
-      <div id="clearBoard" className={`${styles.clear} ${styles.container} ${styles.tooltip}`}>
-        <span class={styles.tooltiptext}>
-        Clear the whole board. Use if you want a blank canvas for Drawing.
+      <div
+        id="clearBoard"
+        className={`${styles.clear} ${styles.container} ${styles.tooltip}`}
+      >
+        <span className={styles.tooltiptext}>
+          Clear the whole board. Use if you want a blank canvas for Drawing.
         </span>
         <Button handleClick={handleClear}>Clear</Button>
+      </div>
+
+      <div
+        id="tooltip"
+        className={`${styles.tooltip} ${styles.container} ${styles.tooltip}`}
+        // onPointerOver={startTooltipAnimation}
+      >
+        <div className={styles.tooltiptext}>
+          Enable tooltip. Hover on buttons to see tooltip.
+        </div>
+        <Button handleClick={toggleTooltip}>Tooltip</Button>
       </div>
     </div>
   );

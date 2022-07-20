@@ -19,6 +19,10 @@
 .clear {
   grid-area: clear;
 }
+#tooltip {
+  grid-area: tip;
+}
+
 /* .stroke {
   grid-area: h;
 }
@@ -32,8 +36,7 @@
   grid-template-areas:
     "start step ran"
     "clear draw draw"
-    "theme res res"
-    /* "i i i" */;
+    "theme res tip";
   grid-gap: 1rem;
   justify-items: center;
   align-items: center;
@@ -63,7 +66,7 @@
 
   width: fit-content;
   margin-left: -60px;
-  padding: .7rem;
+  padding: 0.7rem;
   opacity: 0;
   transition: opacity 0.3s;
 }
@@ -81,7 +84,36 @@
   border-color: #555 transparent transparent transparent;
 }
 
+/* .tooltip:hover .tooltiptext{
+  visibility: visible;
+  opacity: 1;
+} */
+
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
+  animation-play-state: paused;
+  animation-name: fade-in;
+  animation-duration: 5s;
+  animation-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
+  /* animation-delay: 2s; */
+}
+
+@keyframes fade-in {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+  }
+  20% {
+    opacity: 0;
+    visibility: visible;
+  }
+  30% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
+  }
 }

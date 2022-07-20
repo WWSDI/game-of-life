@@ -7,6 +7,7 @@ export default function Button({ handleClick, children, disabled }) {
       className={`${styles.button}`}
       onClick={handleClick}
       disabled={disabled}
+      
     >
       <span>{children}</span>
     </button>

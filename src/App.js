@@ -16,6 +16,7 @@ function App() {
   // a possible way to improve performance is to use object intead of boolean for cell value
   const [board, setBoard] = useState(getInitRan(cols, rows, seed));
   const [theme, setTheme] = useState("vividRainbow");
+  const [tooltip, setTooltip] = useState(false);
 
   return (
     <div className="App">
@@ -67,6 +68,8 @@ function App() {
         setStep={setStep}
         draw={draw}
         setDraw={setDraw}
+        tooltip={tooltip}
+        setTooltip={setTooltip}
       />
     </div>
   );
