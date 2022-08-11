@@ -4,14 +4,11 @@
   --cols: 60;
 }
 
-header {
-  background-color: #85929E ;
-  padding: 1rem 0;
-  position: sticky;
-  top:0;
-}
-
 h1,
 h2 {
   margin: 0;
+}
+
+a {
+  text-decoration: none;
 }
