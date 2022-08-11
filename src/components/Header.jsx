@@ -11,7 +11,9 @@ export default function Header({ generation, messageBoard }) {
           </a>
         </span>{" "}
       </h1>
-      <Info generation={generation} messageBoard={messageBoard} />
+      {generation || messageBoard ? (
+        <Info generation={generation} messageBoard={messageBoard} />
+      ) : null}
     </header>
   );
 }

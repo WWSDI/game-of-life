@@ -7,7 +7,7 @@ import Header from "./components/Header";
 import { getInitRan } from "./utils/boardUtils";
 
 function App() {
-  const [generation, setGeneration] = useState(1);
+  const [generation, setGeneration] = useState(0);
   const [[cols, rows], setColsRows] = useState([60, 40]);
   const [start, setStart] = useState(false);
   const [step, setStep] = useState(false);
@@ -19,7 +19,7 @@ function App() {
   const [theme, setTheme] = useState("vividRainbow");
   const [tooltip, setTooltip] = useState(false);
 
-  const [messageBoard, setMessageBoard] = useState("Enjoy the show!");
+  const [messageBoard, setMessageBoard] = useState("");
 
   return (
     <div className="App">

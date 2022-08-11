@@ -7,8 +7,7 @@ export default function Info({ generation, messageBoard }) {
         {messageBoard}
       </h2>
       <h2 style={{ fontSize: "medium" }}>
-        <span>Generation:</span>
-        <span>{generation}</span>
+        <span>{generation ? `Generation: ${generation}` : null}</span>
       </h2>
     </div>
   );

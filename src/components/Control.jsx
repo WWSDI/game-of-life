@@ -53,7 +53,7 @@ export default function Control({
     if (!start) {
       console.log("⭐️");
       setBoard(getInitRan(cols, rows, seed));
-      setGeneration(1);
+      setGeneration(0);
       return;
     }
 
@@ -61,7 +61,7 @@ export default function Control({
     // very inelegant way to make it sync
     setTimeout(() => {
       setBoard(getInitRan(cols, rows, seed));
-      setGeneration(1);
+      setGeneration(0);
     }, 200);
   };
 
@@ -74,7 +74,7 @@ export default function Control({
       console.log("🥵 inside changeRes: cols, rows", cols, rows);
       document.querySelector(":root").style.setProperty("--cols", cols);
       setBoard(getEmptyBd(cols, rows));
-      setGeneration(1);
+      setGeneration(0);
     }, 200);
   };
 
@@ -84,7 +84,7 @@ export default function Control({
     }
     setTimeout(() => {
       setBoard(getEmptyBd(cols, rows));
-      setGeneration(1);
+      setGeneration(0);
       setMessageBoard("");
     }, 400);
   };
