@@ -115,10 +115,11 @@ export default function Control({
       changeRes(cols, rows);
       setColsRows([cols, rows]);
       setSpeed(1000);
+      setGeneration(0);
     };
     const cleanup = async (waitTime) => {
       await awaitTimeout(waitTime);
-      setMessageBoard("Demo is over, thank you for watching.");
+      if(start) setMessageBoard("Demo is over, thank you for watching.");
 
       await awaitTimeout(3000);
       setMessageBoard("");
@@ -142,16 +143,16 @@ export default function Control({
       setMessageBoard("Demo is about to start");
       await awaitTimeout(2000);
       const shape = getVerticalStripe(cols, rows, 3);
-      
+
       setMessageBoard("Ready?");
       setBoard(shape);
 
       await awaitTimeout(2000);
-      setMessageBoard("Go!");
+      if (start) setMessageBoard("Go!");
       setStart(true);
 
       await awaitTimeout(11000);
-      setMessageBoard("I call this one DC bling bling! 😊");
+      if (start) setMessageBoard("I call this one DC bling bling! 😊");
 
       cleanup(9000);
     };
@@ -166,7 +167,7 @@ export default function Control({
       await awaitTimeout(2000);
       setStart(true);
 
-      cleanup(30000)
+      cleanup(30000);
     };
     const starryNight = async (cols = 80, rows = 40) => {
       setTheStage();
@@ -194,7 +195,9 @@ export default function Control({
       setStart(true);
 
       await awaitTimeout(5000);
-      setMessageBoard("This reminds me a little bit of Frozen. What do you think?");
+      if(start) setMessageBoard(
+        "This reminds me a little bit of Frozen. What do you think?"
+      );
 
       cleanup(5000);
     };
