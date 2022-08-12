@@ -131,7 +131,7 @@ export default function Control({
 
     const title = async () => {
       setMessageBoard(
-        <div style={{ background: "yellow", color: "red" }}>
+        <div style={{ color: "red", textShadow: "1px 1px yellow" }}>
           <p>⚠️ You have NOT selected a demo to play. </p>
           <p>Please choose one from the dropdown list.</p>
         </div>

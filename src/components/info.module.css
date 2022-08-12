@@ -2,7 +2,15 @@
   width: 70vw;
   text-align: left;
   padding-left: 10vw;
+  font-family: "Major Mono Display", monospace;
 }
 
-#messageBoard{
+#messageBoard {
+  color: limegreen;
+  margin-bottom: 1rem;
+}
+
+#generation {
+  font-size: medium;
+  color: white;
 }

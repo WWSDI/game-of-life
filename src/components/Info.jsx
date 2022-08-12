@@ -3,10 +3,10 @@ import styles from "./info.module.css";
 export default function Info({ generation, messageBoard }) {
   return (
     <div id={styles.info}>
-      <h2 id={styles.messageBoard} style={{ color: "Green" }}>
+      <h2 id={styles.messageBoard}>
         {messageBoard}
       </h2>
-      <h2 style={{ fontSize: "medium" }}>
+      <h2 id={styles.generation}>
         <span>{generation ? `Generation: ${generation}` : null}</span>
       </h2>
     </div>

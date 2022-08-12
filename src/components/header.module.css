@@ -1,5 +1,5 @@
 header {
-  background-color: #5d5d5d;
+  background-color: #414141;
   padding: 1rem;
   height: 5rem;
   position: sticky;
@@ -11,13 +11,15 @@ header {
 }
 
 #title {
-  font-size: 3.5rem;
+  font-size: 3.2rem;
   line-height: 90%;
   /* background: yellow; */
   padding: 0;
+  font-family: "Rubik Mono One";
 }
 
 .gradientText {
+  /* --numColorBand: 6; */
   background-image: linear-gradient(
     yellow 0%,
     yellow 30%,
@@ -25,26 +27,22 @@ header {
     rgb(255, 221, 0) 40%,
     orange 40%,
     orange 50%,
-    rgb(255, 119, 0) 40%,
     rgb(255, 119, 0) 50%,
-    red 50%,
-    red 60%
+    rgb(255, 119, 0) 60%,
+    rgb(255, 80, 0) 60%,
+    rgb(255, 80, 0) 70%,
+    red 70%,
+    red 100%
   );
   background-color: red;
   /* background-size: 100%; */
   background-repeat: repeat;
   background-clip: text;
   color: transparent;
-  /* text-fill-color: transparent; */
-  /* color: red; */
   animation: flash 2s;
-  /* animation-duration: 2s; */
-  /* animation-direction: ; */
-  /* animation-fill-mode: both; */
 }
 
 @keyframes flash {
-
   /* 0% {
     filter: contrast(100%);
   }
