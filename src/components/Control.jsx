@@ -300,7 +300,12 @@ export default function Control({
           <p>You can choose different demo to watch.</p>
           <p>Sit back and enjoy the mesmerising show!</p>
         </div>
-        <Button handleClick={() => handleDemo(demo)}>Demo</Button>
+        <Button
+          handleClick={() => handleDemo(demo)}
+          disabled={start ? true : false}
+        >
+          Demo
+        </Button>
         <div className="flexContainer">
           <label>
             <select value={demo} onChange={(e) => setDemo(e.target.value)}>
