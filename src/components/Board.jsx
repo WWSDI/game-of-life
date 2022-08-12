@@ -96,7 +96,7 @@ export default function Board({
 
   // for normal start/stop
   useEffect(() => {
-    console.log("<Board>: start/stop, cols, rows", cols, rows);
+    // console.log("<Board>: start/stop, cols, rows", cols, rows);
 
     if (!start) return;
 

@@ -14,7 +14,7 @@ import {
   getSquare,
   getVerticalStripe,
 } from "../utils/demoUtil";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Control({
   cols,
@@ -38,6 +38,7 @@ export default function Control({
   setMessageBoard,
 }) {
   const [demo, setDemo] = useState("title");
+  const startRef = useRef(start);
 
   const changeTheme = (event) => {
     setTheme(event.target.value);
@@ -46,6 +47,7 @@ export default function Control({
   const handleStartStop = () => {
     console.log("⭐️ start/stop clicked: current gen:", generation);
     setStart(!start);
+    startRef.current = !start;
   };
 
   const clickRandom = (seed) => {
@@ -116,17 +118,18 @@ export default function Control({
       setColsRows([cols, rows]);
       setSpeed(1000);
       setGeneration(0);
+      setMessageBoard("Demo is about to start");
     };
     const cleanup = async (waitTime) => {
       await awaitTimeout(waitTime);
-      if(start) setMessageBoard("Demo is over, thank you for watching.");
+      if (startRef.current)
+        setMessageBoard("Demo is over, thank you for watching.");
 
       await awaitTimeout(3000);
       setMessageBoard("");
     };
 
     const title = async () => {
-      console.log("Demo - title");
       setMessageBoard(
         <div style={{ background: "yellow", color: "red" }}>
           <p>⚠️ You have NOT selected a demo to play. </p>
@@ -140,7 +143,6 @@ export default function Control({
     const dcBlingBling = async (cols = 80, rows = 40) => {
       setTheStage();
 
-      setMessageBoard("Demo is about to start");
       await awaitTimeout(2000);
       const shape = getVerticalStripe(cols, rows, 3);
 
@@ -148,11 +150,12 @@ export default function Control({
       setBoard(shape);
 
       await awaitTimeout(2000);
-      if (start) setMessageBoard("Go!");
+      setMessageBoard("Go!");
       setStart(true);
+      startRef.current = true;
 
       await awaitTimeout(11000);
-      if (start) setMessageBoard("I call this one DC bling bling! 😊");
+      if (startRef.current) setMessageBoard("Bling bling! 😊");
 
       cleanup(9000);
     };
@@ -164,10 +167,15 @@ export default function Control({
       console.log(shape);
       setBoard(shape);
 
+      setMessageBoard("Go!");
       await awaitTimeout(2000);
       setStart(true);
+      startRef.current = true;
 
-      cleanup(30000);
+      await awaitTimeout(15000);
+      if (startRef.current) setMessageBoard("Still going...");
+
+      cleanup(15000);
     };
     const starryNight = async (cols = 80, rows = 40) => {
       setTheStage();
@@ -178,9 +186,14 @@ export default function Control({
       setBoard(shape);
 
       await awaitTimeout(2000);
+      setMessageBoard("Go!");
       setStart(true);
+      startRef.current = true;
 
-      cleanup(30000);
+      await awaitTimeout(15000);
+      if (startRef.current) setMessageBoard("Still going...");
+
+      cleanup(15000);
     };
     const snowFlake = async (cols = 80, rows = 50) => {
       setTheStage(cols, rows);
@@ -193,11 +206,13 @@ export default function Control({
 
       await awaitTimeout(2000);
       setStart(true);
+      startRef.current = true;
 
       await awaitTimeout(5000);
-      if(start) setMessageBoard(
-        "This reminds me a little bit of Frozen. What do you think?"
-      );
+      if (startRef.current)
+        setMessageBoard(
+          "This reminds me a little bit of Frozen. What do you think?"
+        );
 
       cleanup(5000);
     };

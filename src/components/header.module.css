@@ -1,9 +1,9 @@
 header {
-  background-color: #5d5d5d ;
+  background-color: #5d5d5d;
   padding: 1rem;
   height: 5rem;
   position: sticky;
-  top:0;
+  top: 0;
   display: flex;
   /* justify-content: flex-start; */
   justify-content: center;
@@ -11,5 +11,47 @@ header {
 }
 
 #title {
-  font-size:small
+  font-size: 3.5rem;
+  line-height: 90%;
+  /* background: yellow; */
+  padding: 0;
+}
+
+.gradientText {
+  background-image: linear-gradient(
+    yellow 0%,
+    yellow 30%,
+    rgb(255, 221, 0) 30%,
+    rgb(255, 221, 0) 40%,
+    orange 40%,
+    orange 50%,
+    rgb(255, 119, 0) 40%,
+    rgb(255, 119, 0) 50%,
+    red 50%,
+    red 60%
+  );
+  background-color: red;
+  /* background-size: 100%; */
+  background-repeat: repeat;
+  background-clip: text;
+  color: transparent;
+  /* text-fill-color: transparent; */
+  /* color: red; */
+  animation: flash 2s;
+  /* animation-duration: 2s; */
+  /* animation-direction: ; */
+  /* animation-fill-mode: both; */
+}
+
+@keyframes flash {
+
+  /* 0% {
+    filter: contrast(100%);
+  }
+  50% {
+    filter: contrast(300%);
+  }
+  100% {
+    filter: contrast(100%);
+  } */
 }
