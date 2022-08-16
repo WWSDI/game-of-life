@@ -6,13 +6,15 @@
 }
 
 #messageBoard {
-  color: limegreen;
+  color: rgb(128, 212, 128);
   margin-bottom: 1rem;
-
-  /* animation-name: breathing;
-  animation-duration: 1s;
+  font-weight: bold;
+  font-size: 1.5rem;
+  animation-name: breathing;
+  animation-duration: .8s;
   animation-direction: alternate;
-  animation-iteration-count: 1; */
+  animation-timing-function: ease-in;
+  animation-iteration-count: infinite;
 }
 
 #generation {
@@ -20,11 +22,11 @@
   color: white;
 }
 
-/* 
 @keyframes breathing {
   0% {
-    color: transparent;
+    /* filter: contrast(100%); */
   }
   100% {
+    filter: saturate(500%);
   }
-} */
+}

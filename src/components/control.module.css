@@ -50,9 +50,9 @@
 }
 
 .warning {
-  color: red;
+  color: rgb(255, 82, 82);
   font-size: 1.2rem;
-  text-shadow: 1px 1px yellow;
+  text-shadow: 1px 1px rgb(251, 251, 113);
 }
 
 .controlContainer {
