@@ -32,6 +32,7 @@ export default function Control({
   setTheme,
   step,
   setStep,
+  draw,
   setDraw,
   setTooltip,
   tooltip,
@@ -132,11 +133,10 @@ export default function Control({
     const title = async () => {
       setMessageBoard(
         <div style={{ color: "red", textShadow: "1px 1px yellow" }}>
-          <p>⚠️ You have NOT selected a demo to play. </p>
-          <p>Please choose one from the dropdown list.</p>
+          <p>⚠️ Please first choose a demo from the dropdown list to play.</p>
         </div>
       );
-      await awaitTimeout(3000);
+      await awaitTimeout(5000);
       setMessageBoard("");
     };
 
@@ -329,10 +329,36 @@ export default function Control({
           <p>Use the slider to change the speed.</p>
         </div>
         <Button handleClick={handleStartStop}>
-          {start ? "STOP" : "START"}
+          {/* {start ? "STOP" : "START"} */}
+          {start ? (
+            <div
+              style={{
+                fontVariationSettings:
+                  "'FILL' 0, 'wght' 100, 'GRAD' 0, 'opsz' 48;",
+              }}
+            >
+              <span class="material-symbols-outlined">pause</span>
+            </div>
+          ) : (
+            <div
+              style={{
+                fontVariationSettings:
+                  "'FILL' 0, 'wght' 100, 'GRAD' 0, 'opsz' 48;",
+              }}
+            >
+              <span class="material-symbols-outlined">play_arrow</span>
+            </div>
+          )}
         </Button>
         <div className="flexContainer ">
           <label>
+            {/* use parabola function to turn speed slider from linear to parabola that is more inline with actual speed changes */}
+            <span>
+              Speed{": "}
+              {speed < 200
+                ? (speed ** 2 / 10000 + 1).toFixed(1)
+                : Math.round(speed ** 2 / 10000)}
+            </span>
             <input
               type="range"
               value={speed}
@@ -344,12 +370,6 @@ export default function Control({
               }}
             />
           </label>
-          {/* use parabola function to turn speed slider from linear to parabola that is more inline with actual speed changes */}
-          <span>
-            {speed < 200
-              ? (speed ** 2 / 10000 + 1).toFixed(1)
-              : Math.round(speed ** 2 / 10000)}
-          </span>
         </div>
       </div>
 
@@ -357,7 +377,7 @@ export default function Control({
         id="step"
         className={`${styles.step} ${styles.container} ${styles.tooltip}`}
         onClick={() => {
-          console.log("<Control>: step button clicked", step);
+          console.log("<Control>: step button clickesd", step);
           setStep(() => !step);
           // setStep(true);
         }}
@@ -369,7 +389,16 @@ export default function Control({
             with the drawing feature before stepping into the next generation.
           </p>
         </div>
-        <Button disabled={start ? true : false}>Step</Button>
+        <Button disabled={start ? true : false}>
+          <div
+            style={{
+              fontVariationSettings:
+                "'FILL' 0, 'wght' 100, 'GRAD' 0, 'opsz' 48;",
+            }}
+          >
+            <span class="material-symbols-outlined">skip_next</span>
+          </div>
+        </Button>
       </div>
 
       <div
@@ -384,13 +413,16 @@ export default function Control({
           </p>
         </div>
         <label>
-          Seed Number
+          <span>Seed: {seed}</span>
           <input
-            type="number"
+            type="range"
+            value={seed}
+            min={0}
+            max={2000}
+            step={10}
             onChange={(e) => {
               setSeed(e.target.value);
             }}
-            value={seed}
           />
         </label>
         <Button handleClick={() => clickRandom(seed)}>Random</Button>
@@ -444,7 +476,27 @@ export default function Control({
             );
           })(window.navigator.platform.includes("Mac"))}
         </div>
-        <Button handleClick={toggleDraw}>Draw</Button>
+        <Button handleClick={toggleDraw}>
+          {draw ? (
+            <div
+              style={{
+                fontVariationSettings:
+                  "'FILL' 0, 'wght' 100, 'GRAD' 0, 'opsz' 48;",
+              }}
+            >
+              <span class="material-symbols-outlined">draw</span>
+            </div>
+          ) : (
+            <div
+              style={{
+                fontVariationSettings:
+                  "'FILL' 0, 'wght' 100, 'GRAD' 0, 'opsz' 48;",
+              }}
+            >
+              <span class="material-symbols-outlined">edit</span>
+            </div>
+          )}
+        </Button>
       </div>
 
       <div
@@ -466,7 +518,16 @@ export default function Control({
         <div className={styles.tooltiptext}>
           Enable tooltip. Hover on buttons to see tooltip.
         </div>
-        <Button handleClick={toggleTooltip}>Tooltip</Button>
+        <Button handleClick={toggleTooltip}>
+          <div
+            style={{
+              fontVariationSettings:
+                "'FILL' 0, 'wght' 100, 'GRAD' 0, 'opsz' 48;",
+            }}
+          >
+            <span class="material-symbols-outlined">question_mark</span>
+          </div>
+        </Button>
       </div>
     </div>
   );
