@@ -366,23 +366,25 @@ export default function Control({
       </div>
 
       <div className={`${styles.flexContainer} ${styles.speed}`}>
-        {/* use parabola function to turn speed slider from linear to parabola that is more inline with actual speed changes */}
-        <span>
-          Speed{": "}
-          {speed < 200
-            ? (speed ** 2 / 10000 + 1).toFixed(1)
-            : Math.round(speed ** 2 / 10000)}
-        </span>
-        <input
-          type="range"
-          value={speed}
-          min={0}
-          max={1000}
-          step={10}
-          onChange={(e) => {
-            setSpeed(Number(e.target.value));
-          }}
-        />
+        <div>
+          {/* use parabola function to turn speed slider from linear to parabola that is more inline with actual speed changes */}
+          <span>
+            Speed{": "}
+            {speed < 200
+              ? (speed ** 2 / 10000 + 1).toFixed(1)
+              : Math.round(speed ** 2 / 10000)}
+          </span>
+          <input
+            type="range"
+            value={speed}
+            min={0}
+            max={1000}
+            step={10}
+            onChange={(e) => {
+              setSpeed(Number(e.target.value));
+            }}
+          />
+        </div>
       </div>
 
       <div
@@ -434,7 +436,8 @@ export default function Control({
         <div className={styles.tooltiptext}>
           <p>Choose seed number</p>
           <p>
-            Seed number determines how many cells are 'live' when you click 'Random' button to randomly initialise the board.
+            Seed number determines how many cells are 'live' when you click
+            'Random' button to randomly initialise the board.
           </p>
         </div>
         <span>Seed: {seed}</span>
@@ -538,7 +541,33 @@ export default function Control({
         // onPointerOver={startTooltipAnimation}
       >
         <div className={styles.tooltiptext}>
-          Enable tooltip. Hover on buttons to see tooltip.
+          <p>Enable tooltip. Hover on buttons to see tooltip.</p>
+          <p>------------------------------------------</p>
+          <p>Game of Life Intro:</p>
+          <p style={{ textAlign: "left" }}>
+            Each dot on the grid/board is a cell. A black cell is a dead cell; a coloured cell is a live cell. At each step in time, the following transitions occur:
+          </p>
+          <ul style={{ textAlign: "left" }}>
+            <li>
+              Any live cell with fewer than 2 live neighbours dies, as if by{" "}
+              <strong>underpopulation</strong>.
+            </li>
+            <br></br>
+            <li>
+              Any live cell with 2 or 3 live neighbours{" "}
+              <strong>lives on</strong> to the next generation.
+            </li>
+            <br></br>
+            <li>
+              Any live cell with more than 3 live neighbours dies, as if by{" "}
+              <strong>overpopulation</strong>.
+            </li>
+            <br></br>
+            <li>
+              Any dead cell with exactly 3 live neighbours becomes a live cell,
+              as if by <strong>reproduction</strong>.
+            </li>
+          </ul>
         </div>
         <Button handleClick={toggleTooltip}>
           <div
