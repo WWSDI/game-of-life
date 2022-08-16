@@ -5,6 +5,7 @@ body {
     sans-serif; */
   font-family: "rubik mono one";
   font-size: 13px;
+  /* color: #414141; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -17,4 +18,5 @@ code {
 select {
   font-family: inherit;
   font-size: inherit;
+  /* color: inherit; */
 }

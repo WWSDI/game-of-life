@@ -8,9 +8,23 @@
 #messageBoard {
   color: limegreen;
   margin-bottom: 1rem;
+
+  /* animation-name: breathing;
+  animation-duration: 1s;
+  animation-direction: alternate;
+  animation-iteration-count: 1; */
 }
 
 #generation {
   font-size: medium;
   color: white;
 }
+
+/* 
+@keyframes breathing {
+  0% {
+    color: transparent;
+  }
+  100% {
+  }
+} */

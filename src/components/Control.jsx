@@ -132,13 +132,7 @@ export default function Control({
 
     const title = async () => {
       setMessageBoard(
-        <div
-          style={{
-            color: "red",
-            fontSize: "1.2rem",
-            textShadow: "1px 1px yellow",
-          }}
-        >
+        <div className={styles.warning}>
           <p>⚠️ Please first choose a demo from the dropdown list to play.</p>
         </div>
       );
@@ -314,7 +308,11 @@ export default function Control({
             <p>Sit back and enjoy the mesmerising show!</p>
           </div>
           <div className="flexContainer">
-            <select value={demo} onChange={(e) => setDemo(e.target.value)}>
+            <select
+              value={demo}
+              onChange={(e) => setDemo(e.target.value)}
+              disabled={start ? true : false}
+            >
               <option value="title" disabled>
                 Choose a demo to
               </option>
@@ -545,7 +543,9 @@ export default function Control({
           <p>------------------------------------------</p>
           <p>Game of Life Intro:</p>
           <p style={{ textAlign: "left" }}>
-            Each dot on the grid/board is a cell. A black cell is a dead cell; a coloured cell is a live cell. At each step in time, the following transitions occur:
+            Each dot on the grid/board is a cell. A black cell is a dead cell; a
+            coloured cell is a live cell. At each step in time, the following
+            transitions occur:
           </p>
           <ul style={{ textAlign: "left" }}>
             <li>

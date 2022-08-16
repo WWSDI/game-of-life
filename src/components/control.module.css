@@ -7,11 +7,14 @@
 .tip {
   grid-area: tip;
 }
-.changeCorlorTheme {
+.changeColorTheme {
   grid-area: theme;
   /* justify-self: right; */
   /* align-self: flex-end; */
 }
+/* .changeColorTheme > div {
+  width: 100%;
+} */
 .changeResolution {
   grid-area: res;
   /* justify-self: end; */
@@ -46,6 +49,12 @@
   justify-content: space-evenly;
 }
 
+.warning {
+  color: red;
+  font-size: 1.2rem;
+  text-shadow: 1px 1px yellow;
+}
+
 .controlContainer {
   margin: 0 auto 5rem auto;
   display: grid;
@@ -57,7 +66,7 @@
     "start step ran draw clear tip"
     "demo demo demo res res res";
   /* grid-gap: .1rem; */
-  justify-items: left;
+  justify-items: center;
   align-items: center;
 }
 
