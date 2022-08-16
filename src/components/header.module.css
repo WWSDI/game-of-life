@@ -1,5 +1,5 @@
 header {
-  background-color:#414141;
+  background-color: #414141;
   padding: 1rem;
   height: 5rem;
   position: sticky;
@@ -19,19 +19,20 @@ header {
 }
 
 .gradientText {
-  /* --numColorBand: 6; */
+  --numColorBand: 6;
+  --marginTop: 26%;
   background-image: linear-gradient(
     yellow 0%,
-    yellow 30%,
-    rgb(255, 221, 0) 30%,
-    rgb(255, 221, 0) 40%,
-    orange 40%,
-    orange 50%,
-    rgb(255, 119, 0) 50%,
-    rgb(255, 119, 0) 60%,
-    rgb(255, 80, 0) 60%,
-    rgb(255, 80, 0) 70%,
-    red 70%,
+    yellow var(--marginTop),
+    rgb(255, 221, 0) var(--marginTop),
+    rgb(255, 221, 0) calc(var(--marginTop) + 10%),
+    orange calc(var(--marginTop) + 10%),
+    orange calc(var(--marginTop) + calc(10% * 2)),
+    rgb(255, 119, 0) calc(var(--marginTop) + calc(10% * 2)),
+    rgb(255, 119, 0) calc(var(--marginTop) + calc(10% * 3)),
+    rgb(255, 80, 0) calc(var(--marginTop) + calc(10% * 3)),
+    rgb(255, 80, 0) calc(var(--marginTop) + calc(10% * 4)),
+    red calc(var(--marginTop) + calc(10% * 4)),
     red 100%
   );
   background-color: red;
