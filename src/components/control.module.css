@@ -1,8 +1,20 @@
+.speed {
+  grid-area: speed;
+}
+.seed {
+  grid-area: seed;
+}
+.tip {
+  grid-area: tip;
+}
 .changeCorlorTheme {
   grid-area: theme;
+  /* justify-self: right; */
+  /* align-self: flex-end; */
 }
 .changeResolution {
   grid-area: res;
+  /* justify-self: end; */
 }
 .startStop {
   grid-area: start;
@@ -19,26 +31,34 @@
 .clear {
   grid-area: clear;
 }
-#tooltip {
-  grid-area: tip;
+.demo {
+  grid-area: demo;
+  /* justify-self: center; */
 }
-
-/* .stroke {
-  grid-area: h;
-}
-.erase {
-  grid-area: i;
+/* .empty{
+  grid-area: emp;
 } */
 
+.demo > div,
+.changeResolution > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
 .controlContainer {
-  margin: 1rem 20%;
+  margin: 0 auto 5rem auto;
   display: grid;
+  width: 39rem;
+  grid-template-columns: repeat(6, 6.5rem);
+  grid-template-rows: repeat(3, 3.5rem);
   grid-template-areas:
-    "start step ran"
-    "clear draw draw"
-    "theme res tip";
-  grid-gap: 1rem;
-  justify-items: center;
+    "speed speed seed seed theme theme"
+    "start step ran draw clear tip"
+    "demo demo demo res res res";
+    /* "emp emp theme theme theme"; */
+  /* grid-gap: .1rem; */
+  justify-items: left;
   align-items: center;
 }
 
@@ -85,12 +105,9 @@
   border-color: #555 transparent transparent transparent;
 }
 
-/* .tooltip:hover .tooltiptext{
-  visibility: visible;
-  opacity: 1;
-} */
-
 .tooltip:hover .tooltiptext {
+  font-family: helvetica, monospace;
+  font-size: 16px;
   visibility: visible;
   opacity: 1;
   animation-play-state: paused;

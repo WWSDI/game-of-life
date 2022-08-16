@@ -1,25 +1,33 @@
 .button {
   display: inline-block;
   width: 5rem;
-  height: 3rem;
+  height: 2rem;
+  border: none;
+  background: none;
+  font-size: inherit;
 
   padding: 0.3rem;
   /* border: 2px solid gray; */
-  border-radius: 1rem;
-  background-color: rgb(156, 236, 34);
+  /* border-radius: 1rem; */
+  /* background-color: rgb(156, 236, 34); */
   cursor: pointer;
 
   display: flex;
   justify-content: center;
   /* margin: auto 0; */
   align-items: center;
+  font-family: "rubik mono one";
+  font-size: 16px;
 }
 
 .button:hover {
-  background-color: greenyellow;
+  font-variation-settings: 'wght' 900;
+  font-weight: 900;
+  color: deepskyblue;
 }
 .button:active {
-  background-color: rgb(134, 206, 24);
+  /* background-color: rgb(134, 206, 24); */
+  color: deepskyblue;
 }
 .button:disabled {
   /* prevents button from showing hover and active css effect (e.g. being highlighted) */
@@ -27,6 +35,8 @@
 }
 
 .buttonActivated {
-  background-color: pink;
+  /* background-color: pink; */
+  color: deepskyblue;
   font-size: large;
+  font-variation-settings: 'wght' 700;
 }

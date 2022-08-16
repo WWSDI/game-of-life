@@ -132,7 +132,13 @@ export default function Control({
 
     const title = async () => {
       setMessageBoard(
-        <div style={{ color: "red", textShadow: "1px 1px yellow" }}>
+        <div
+          style={{
+            color: "red",
+            fontSize: "1.2rem",
+            textShadow: "1px 1px yellow",
+          }}
+        >
           <p>⚠️ Please first choose a demo from the dropdown list to play.</p>
         </div>
       );
@@ -233,91 +239,98 @@ export default function Control({
       <div
         className={`${styles.changeColorTheme} ${styles.container} ${styles.tooltip}`}
       >
-        <span className={styles.tooltiptext}>
-          Change colour theme of the board
-        </span>
-        <select
-          name="changeColorTheme"
-          onChange={changeTheme}
-          defaultValue="title"
-        >
-          <option value="title" disabled>
-            Change Color Theme
-          </option>
-          <option value="dimRainbow">Dim Rainbow</option>
-          <option value="vividRainbow">Vivid Rainbow</option>
-          <option value="matrix">Matrix</option>
-          <option value="mono">Mono Green</option>
-          <option value="finland">Finland</option>
-          <option value="sky">Sky</option>
-          <option value="flame">Flame</option>
-          <option value="cherryblossom">Cherry Blossom</option>
-        </select>
+        <div>
+          <span className={styles.tooltiptext}>
+            Change colour theme of the board. You can change colour while the
+            game is playing.
+          </span>
+          <select
+            name="changeColorTheme"
+            onChange={changeTheme}
+            defaultValue="title"
+          >
+            <option value="title" disabled>
+              Color Theme
+            </option>
+            <option value="dimRainbow">Dim Rainbow</option>
+            <option value="vividRainbow">Vivid Rainbow</option>
+            <option value="matrix">Matrix</option>
+            <option value="mono">Mono Green</option>
+            <option value="finland">Finland</option>
+            <option value="sky">Sky</option>
+            <option value="flame">Flame</option>
+            <option value="cherryblossom">Cherry Blossom</option>
+          </select>
+        </div>
       </div>
 
       <div
         className={`${styles.changeResolution} ${styles.container} ${styles.tooltip}`}
       >
-        <div className={styles.tooltiptext}>
-          <p>Change resolution and shape of the board.</p>
-        </div>
-        <select
-          name="changeResolution"
-          disabled={start ? true : false}
-          onChange={(e) => {
-            if (!e.target.value) return;
-            if (start) {
-              setStart(false);
-              return;
-            }
+        <div>
+          <div className={styles.tooltiptext}>
+            <p>Change resolution and shape of the board.</p>
+          </div>
+          <select
+            name="changeResolution"
+            disabled={start ? true : false}
+            onChange={(e) => {
+              if (!e.target.value) return;
+              if (start) {
+                setStart(false);
+                return;
+              }
 
-            const [cols, rows] = e.target.value.match(/(\d{2})/g);
-            setColsRows([+cols, +rows]);
-          }}
-          defaultValue="title"
-        >
-          <option value="title" disabled>
-            Choose a resolution
-          </option>
-          <option value={[30, 30]}>Square (S, 30*30)</option>
-          <option value={[40, 40]}>Square (M, 40*40)</option>
-          <option value={[50, 50]}>Square (L, 50*50)</option>
-          <option value={[50, 30]}>Widescreen (S, 50*30)</option>
-          <option value={[60, 40]}>Widescreen (M, 60*40)</option>
-          <option value={[80, 40]}>Widescreen (L, 80*40)</option>
-        </select>
-        <Button
-          handleClick={() => changeRes(cols, rows)}
-          disabled={start ? true : false}
-        >
-          Change Resolution
-        </Button>
+              const [cols, rows] = e.target.value.match(/(\d{2})/g);
+              setColsRows([+cols, +rows]);
+            }}
+            defaultValue="title"
+          >
+            <option value="title" disabled>
+              Choose size to
+            </option>
+            <option value={[30, 30]}>Square (30*30)</option>
+            <option value={[40, 40]}>Square (40*40)</option>
+            <option value={[50, 50]}>Square (50*50)</option>
+            <option value={[50, 30]}>Wide (50*30)</option>
+            <option value={[60, 40]}>Wide (60*40)</option>
+            <option value={[80, 40]}>Wide (80*40)</option>
+          </select>
+          <Button
+            handleClick={() => changeRes(cols, rows)}
+            disabled={start ? true : false}
+            style={{ width: "6rem" }}
+          >
+            Apply
+          </Button>
+        </div>
       </div>
 
       <div className={`${styles.demo} ${styles.container} ${styles.tooltip}`}>
-        <div className={styles.tooltiptext}>
-          <p>Watch automated demo.</p>
-          <p>You can choose different demo to watch.</p>
-          <p>Sit back and enjoy the mesmerising show!</p>
-        </div>
-        <Button
-          handleClick={() => handleDemo(demo)}
-          disabled={start ? true : false}
-        >
-          Demo
-        </Button>
-        <div className="flexContainer">
-          <label>
+        <div>
+          <div className={styles.tooltiptext}>
+            <p>Watch automated demo.</p>
+            <p>You can choose different demo to watch.</p>
+            <p>Sit back and enjoy the mesmerising show!</p>
+          </div>
+          <div className="flexContainer">
             <select value={demo} onChange={(e) => setDemo(e.target.value)}>
               <option value="title" disabled>
-                Choose a demo
+                Choose a demo to
               </option>
               <option value="dcBlingBling">DC Bling Bling</option>
               <option value="starryNight">Starry Night</option>
               <option value="snowFlake">Snow Flake</option>
               <option value="doubleStripe">Double Stripe</option>
             </select>
-          </label>
+          </div>
+          <Button
+            handleClick={() => handleDemo(demo)}
+            disabled={start ? true : false}
+            style={{ width: "5rem" }}
+          >
+            Play
+          </Button>
         </div>
       </div>
 
@@ -350,27 +363,26 @@ export default function Control({
             </div>
           )}
         </Button>
-        <div className="flexContainer ">
-          <label>
-            {/* use parabola function to turn speed slider from linear to parabola that is more inline with actual speed changes */}
-            <span>
-              Speed{": "}
-              {speed < 200
-                ? (speed ** 2 / 10000 + 1).toFixed(1)
-                : Math.round(speed ** 2 / 10000)}
-            </span>
-            <input
-              type="range"
-              value={speed}
-              min={0}
-              max={1000}
-              step={10}
-              onChange={(e) => {
-                setSpeed(Number(e.target.value));
-              }}
-            />
-          </label>
-        </div>
+      </div>
+
+      <div className={`${styles.flexContainer} ${styles.speed}`}>
+        {/* use parabola function to turn speed slider from linear to parabola that is more inline with actual speed changes */}
+        <span>
+          Speed{": "}
+          {speed < 200
+            ? (speed ** 2 / 10000 + 1).toFixed(1)
+            : Math.round(speed ** 2 / 10000)}
+        </span>
+        <input
+          type="range"
+          value={speed}
+          min={0}
+          max={1000}
+          step={10}
+          onChange={(e) => {
+            setSpeed(Number(e.target.value));
+          }}
+        />
       </div>
 
       <div
@@ -412,20 +424,30 @@ export default function Control({
             into the board.
           </p>
         </div>
-        <label>
-          <span>Seed: {seed}</span>
-          <input
-            type="range"
-            value={seed}
-            min={0}
-            max={2000}
-            step={10}
-            onChange={(e) => {
-              setSeed(e.target.value);
-            }}
-          />
-        </label>
+
         <Button handleClick={() => clickRandom(seed)}>Random</Button>
+      </div>
+
+      <div
+        className={`${styles.seed} ${styles.flexContainer} ${styles.tooltip}`}
+      >
+        <div className={styles.tooltiptext}>
+          <p>Choose seed number</p>
+          <p>
+            Seed number determines how many cells are 'live' when you click 'Random' button to randomly initialise the board.
+          </p>
+        </div>
+        <span>Seed: {seed}</span>
+        <input
+          type="range"
+          value={seed}
+          min={0}
+          max={2000}
+          step={10}
+          onChange={(e) => {
+            setSeed(e.target.value);
+          }}
+        />
       </div>
 
       <div
@@ -465,7 +487,8 @@ export default function Control({
                 </li>
                 <li>
                   <p>
-                    <strong>Apply Thinstroke</strong>: hold ALSO{" "}
+                    <strong>Apply Thinstroke</strong>: hold either one of the
+                    above key while ALSO{" "}
                     <span style={{ fontWeight: "bold", color: "greenyellow" }}>
                       {keys[2]}
                     </span>{" "}
@@ -511,8 +534,7 @@ export default function Control({
       </div>
 
       <div
-        id="tooltip"
-        className={`${styles.tooltip} ${styles.container} ${styles.tooltip}`}
+        className={`${styles.tip} ${styles.container} ${styles.tooltip}`}
         // onPointerOver={startTooltipAnimation}
       >
         <div className={styles.tooltiptext}>
