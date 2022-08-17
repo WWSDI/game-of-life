@@ -21,36 +21,83 @@ header {
 .gradientText {
   --numColorBand: 6;
   --marginTop: 26%;
+  --color1: yellow;
+  --color2: rgb(255, 221, 0);
+  --color3: orange;
+  --color4: rgb(255, 119, 0);
+  --color5: rgb(255, 80, 0);
+  --color6: red;
+
   background-image: linear-gradient(
-    yellow 0%,
-    yellow var(--marginTop),
-    rgb(255, 221, 0) var(--marginTop),
-    rgb(255, 221, 0) calc(var(--marginTop) + 10%),
-    orange calc(var(--marginTop) + 10%),
-    orange calc(var(--marginTop) + calc(10% * 2)),
-    rgb(255, 119, 0) calc(var(--marginTop) + calc(10% * 2)),
-    rgb(255, 119, 0) calc(var(--marginTop) + calc(10% * 3)),
-    rgb(255, 80, 0) calc(var(--marginTop) + calc(10% * 3)),
-    rgb(255, 80, 0) calc(var(--marginTop) + calc(10% * 4)),
-    red calc(var(--marginTop) + calc(10% * 4)),
-    red 100%
+    var(--color1) 0%,
+    var(--color1) var(--marginTop),
+    var(--color2) var(--marginTop),
+    var(--color2) calc(var(--marginTop) + 10%),
+    var(--color3) calc(var(--marginTop) + 10%),
+    var(--color3) calc(var(--marginTop) + calc(10% * 2)),
+    var(--color4) calc(var(--marginTop) + calc(10% * 2)),
+    var(--color4) calc(var(--marginTop) + calc(10% * 3)),
+    var(--color5) calc(var(--marginTop) + calc(10% * 3)),
+    var(--color5) calc(var(--marginTop) + calc(10% * 4)),
+    var(--color6) calc(var(--marginTop) + calc(10% * 4)),
+    var(--color6) 100%
   );
   background-color: red;
   /* background-size: 100%; */
   background-repeat: repeat;
   background-clip: text;
   color: transparent;
-  animation: flash 2s;
+  animation: color-rotation 0.5s linear 3s;
+  animation-iteration-count: 10;
 }
 
-@keyframes flash {
-  /* 0% {
-    filter: contrast(100%);
+@keyframes color-rotation {
+  16% {
+    --color6: yellow;
+    --color1: rgb(255, 221, 0);
+    --color2: orange;
+    --color3: rgb(255, 119, 0);
+    --color4: rgb(255, 80, 0);
+    --color5: red;
+  }
+  33% {
+    --color5: yellow;
+    --color6: rgb(255, 221, 0);
+    --color1: orange;
+    --color2: rgb(255, 119, 0);
+    --color3: rgb(255, 80, 0);
+    --color4: red;
   }
   50% {
-    filter: contrast(300%);
+    --color4: yellow;
+    --color5: rgb(255, 221, 0);
+    --color6: orange;
+    --color1: rgb(255, 119, 0);
+    --color2: rgb(255, 80, 0);
+    --color3: red;
+  }
+  67% {
+    --color3: yellow;
+    --color4: rgb(255, 221, 0);
+    --color5: orange;
+    --color6: rgb(255, 119, 0);
+    --color1: rgb(255, 80, 0);
+    --color2: red;
+  }
+  83% {
+    --color2: yellow;
+    --color3: rgb(255, 221, 0);
+    --color4: orange;
+    --color5: rgb(255, 119, 0);
+    --color6: rgb(255, 80, 0);
+    --color1: red;
   }
   100% {
-    filter: contrast(100%);
-  } */
+    --color1: yellow;
+    --color2: rgb(255, 221, 0);
+    --color3: orange;
+    --color4: rgb(255, 119, 0);
+    --color5: rgb(255, 80, 0);
+    --color6: red;
+  }
 }
