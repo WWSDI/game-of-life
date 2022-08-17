@@ -19,14 +19,14 @@ header {
 }
 
 .gradientText {
-  --numColorBand: 6;
+  --numColorSteps: 5;
   --marginTop: 26%;
-  --color1: yellow;
-  --color2: rgb(255, 221, 0);
-  --color3: orange;
-  --color4: rgb(255, 119, 0);
-  --color5: rgb(255, 80, 0);
-  --color6: red;
+  --color1: rgb(255, calc(255 - ((255 / var(--numColorSteps)) * 0)), 0);
+  --color2: rgb(255, calc(255 - ((255 / var(--numColorSteps)) * 1)), 0);
+  --color3: rgb(255, calc(255 - ((255 / var(--numColorSteps)) * 2)), 0);
+  --color4: rgb(255, calc(255 - ((255 / var(--numColorSteps)) * 3)), 0);
+  --color5: rgb(255, calc(255 - ((255 / var(--numColorSteps)) * 4)), 0);
+  --color6: rgb(255, calc(255 - ((255 / var(--numColorSteps)) * 5)), 0);
 
   background-image: linear-gradient(
     var(--color1) 0%,
