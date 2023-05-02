@@ -117,7 +117,7 @@ export default function Control({
     const setTheStage = (cols = 80, rows = 40) => {
       changeRes(cols, rows);
       setColsRows([cols, rows]);
-      setSpeed(1000);
+      setSpeed(900);
       setGeneration(0);
       setMessageBoard("Demo is about to start");
     };

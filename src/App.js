@@ -12,7 +12,7 @@ function App() {
   const [start, setStart] = useState(false);
   const [step, setStep] = useState(false);
   const [seed, setSeed] = useState(800);
-  const [speed, setSpeed] = useState(1000);
+  const [speed, setSpeed] = useState(940);
   const [draw, setDraw] = useState(false);
   // a possible way to improve performance is to use object intead of boolean for cell value
   const [board, setBoard] = useState(getInitRan(cols, rows, seed));
