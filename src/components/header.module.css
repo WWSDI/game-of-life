@@ -47,8 +47,14 @@ header {
   background-repeat: repeat;
   background-clip: text;
   color: transparent;
-  animation: color-rotation 0.5s linear 3s;
-  animation-iteration-count: 10;
+  /* animation: color-rotation 0.5s linear 3s;
+  animation-iteration-count: 10; */
+  animation-name: color-rotation, color-rotation, color-rotation, color-rotation,
+    color-rotation; 
+  /* repeat animation property values to play the same animation multiple times with intervals */
+  animation-duration: 0.5s, 0.5s, 0.5s, 0.5s, 0.5s;
+  animation-delay: 3s, 60s, 120s, 180s, 240s;
+  animation-iteration-count: 10, 10, 10, 10, 10;
 }
 
 @keyframes color-rotation {
