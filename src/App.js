@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import "./App.css";
 import Board from "./components/Board";
-import Footer from "./components/Footer";
+import { Footer } from "./components/Footer";
 import Control from "./components/Control";
 import Info from "./components/Info";
 import Header from "./components/Header";
